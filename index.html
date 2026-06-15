@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Aniversarea Noastră ❤️</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Inter:ital,wght@0,900;1,900&display=swap" rel="stylesheet">
+    <style>
+        html, body { background-color: #000000; margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; font-weight: 900; font-style: italic; user-select: none; -webkit-user-select: none; overflow: hidden; width: 100%; height: 100%; transition: transform 0.1s ease; }
+        * { box-sizing: inherit; }
+        #loading-screen { position: fixed; inset: 0; display: flex; justify-content: center; align-items: center; background: #0b0b0e; z-index: 999999; opacity: 1; visibility: visible; transition: opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1), transform 1.2s cubic-bezier(0.25, 1, 0.5, 1), visibility 1.2s; }
+        .logo-fixed-size { width: 150px; height: 150px; position: relative; }
+        .shine-mask { position: absolute; inset: 0; background: rgba(255, 255, 255, 0.12); mask: url("https://apricot-kori-59.tiiny.site/MAOs-1.svg") center/contain no-repeat; -webkit-mask: url("https://apricot-kori-59.tiiny.site/MAOs-1.svg") center/contain no-repeat; overflow: hidden; animation: logoPulse 2.6s ease-in-out infinite; }
+        .shine-mask::before { content: ""; position: absolute; top: -50%; left: -150%; width: 60%; height: 200%; background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.1) 15%, rgba(255,255,255,0.4) 35%, rgba(255,0,119,0.75) 48%, rgba(168,0,255,0.75) 52%, rgba(255,255,255,0.4) 65%, rgba(255,255,255,0.1) 85%, rgba(255,255,255,0) 100%); transform: rotate(28deg); animation: rockstarShine 2.6s cubic-bezier(0.4, 0, 0.2, 1) infinite; }
+        @keyframes rockstarShine { 0% { left: -150%; } 70%, 100% { left: 180%; } }
+        @keyframes logoPulse { 0%, 70%, 100% { background-color: rgba(255, 255, 255, 0.12); } 30% { background-color: rgba(255, 255, 255, 0.22); } }
+        
+        #smooth-scroll-container { width: 100%; position: absolute; top: 0; left: 0; will-change: transform, opacity; background-color: #000000; transition: opacity 0.15s ease-in-out; opacity: 1; }
+        #smooth-scroll-container.font-switching { opacity: 0; }
+
+        .topbar { position: fixed; top: 0; left: 0; width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 30px 40px; z-index: 100000; opacity: 0; visibility: hidden; transform: translateY(-20px); transition: opacity 0.5s ease, transform 0.5s ease, visibility 0.5s; }
+        .topbar.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+        .logo-container { display: flex; align-items: center; cursor: pointer; width: 50px; height: 50px; transition: transform 0.2s ease; }
+        .logo-container img { width: 100%; height: 100%; object-fit: contain; }
+        .logo-container:active, .glitch-initials:active { transform: scale(0.9); }
+        .menu-toggle { width: 58px; height: 52px; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 8px; cursor: pointer; z-index: 100001; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.12); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-radius: 14px; padding: 12px; opacity: 0.6; transition: opacity 0.3s ease, background-color 0.3s ease, border-color 0.3s ease; }
+        .menu-toggle:hover, .menu-toggle.open { opacity: 1; background: rgba(255, 255, 255, 0.15); border-color: rgba(255, 255, 255, 0.3); }
+        .menu-toggle .line { width: 28px; height: 5px; background-color: #ffffff; border-radius: 3px; transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), background-color 0.3s; }
+        .menu-toggle.open .line-1 { transform: translateY(6.5px) rotate(45deg); }
+        .menu-toggle.open .line-2 { transform: translateY(-6.5px) rotate(-45deg); }
+        .side-menu { position: fixed; top: 50%; right: -500px; transform: translateY(-50%); width: 420px; max-height: 95vh; background: rgba(10, 5, 20, 0.82); backdrop-filter: blur(35px); -webkit-backdrop-filter: blur(35px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 24px; box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8); z-index: 99999; padding: 30px; display: flex; flex-direction: column; gap: 20px; opacity: 0; visibility: hidden; overflow-y: auto; transition: right 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.4s ease, visibility 0.4s; }
+        .side-menu.open { right: 40px; opacity: 1; visibility: visible; }
+        
+        /* --- DESIGN NOU: LOVE STATS IN SIDE MENU --- */
+        .love-stats-container { display: flex; flex-direction: column; gap: 12px; background: linear-gradient(135deg, rgba(255, 0, 119, 0.05) 0%, rgba(112, 0, 255, 0.03) 100%); border: 1px solid rgba(255, 0, 119, 0.15); border-radius: 16px; padding: 16px; margin-bottom: 5px; }
+        .love-stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; text-align: center; }
+        .stat-item { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+        .stat-icon { font-size: 1.3rem; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.3)); }
+        .stat-value { font-size: 1.1rem; font-weight: 900; color: #ffffff; background: linear-gradient(45deg, #ff0077, #a800ff); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; font-feature-settings: "tnum"; }
+        .stat-name { font-size: 0.55rem; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 1px; }
+        body.font-romantic .stat-value { font-family: 'Great Vibes', cursive; font-size: 1.7rem; font-style: normal; -webkit-text-fill-color: #ff0077; }
+        body.font-romantic .stat-name { font-family: 'Great Vibes', cursive; font-size: 1.1rem; text-transform: none; letter-spacing: 0; color: rgba(255,255,255,0.6); }
+        
+        /* Delimitare frumoasa cu inimioara */
+        .love-separator { display: flex; align-items: center; justify-content: center; gap: 15px; margin: 5px 0; width: 100%; }
+        .love-separator .sep-line { height: 1px; flex: 1; background: linear-gradient(to var(--line-dir, right), transparent, rgba(255, 0, 119, 0.4), transparent); }
+        .love-separator .sep-heart { font-size: 0.75rem; color: #ff0077; opacity: 0.8; animation: heartMiniBeat 1.6s infinite alternate ease-in-out; }
+        @keyframes heartMiniBeat { 0% { transform: scale(0.9); opacity: 0.6; } 100% { transform: scale(1.15); opacity: 1; filter: drop-shadow(0 0 4px #ff0077); } }
+        /* ------------------------------------------ */
+
+        .menu-section { display: flex; flex-direction: column; gap: 8px; }
+        .menu-label { font-size: 0.72rem; font-weight: 900; letter-spacing: 2px; color: rgba(255, 255, 255, 0.5); text-transform: uppercase; }
+        .menu-btn-group { display: flex; gap: 10px; }
+        .menu-option-btn { flex: 1; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.12); color: rgba(255, 255, 255, 0.8); padding: 12px; font-family: 'Inter', sans-serif; font-weight: 900; font-style: italic; font-size: 0.75rem; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; border-radius: 12px; transition: background-color 0.2s, color 0.2s; }
+        .menu-option-btn.active { background: rgba(255, 255, 255, 0.95); color: #000000; border-color: #ffffff; }
+        .fixed-text-viewport { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; display: flex; justify-content: center; align-items: center; z-index: 10; pointer-events: none; opacity: 0; transition: opacity 0.2s ease, visibility 0.2s ease; visibility: hidden; will-change: opacity, visibility; }
+        .text-fog-wrapper { position: relative; text-align: center; width: 100%; max-width: 1250px; padding: 40px; display: flex; justify-content: center; align-items: center; height: 100%; perspective: 1000px; }
+        .celebration-glow { position: absolute; inset: 0; width: 100%; height: 100%; background: radial-gradient(circle at center, rgba(255, 0, 119, 0.15) 0%, rgba(112, 0, 255, 0.09) 40%, rgba(15, 2, 28, 0.4) 75%, rgba(0, 0, 0, 0) 100%); filter: blur(40px); z-index: 9; pointer-events: none; opacity: 0; will-change: opacity; transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1); }
+        .celebration-glow.active { opacity: 1; animation: celebrationAtmosphere 6s ease-in-out infinite alternate; }
+        @keyframes celebrationAtmosphere { 0% { opacity: 0.85; background-size: 100% 100%; } 100% { opacity: 1; background-size: 115% 115%; } }
+        .confetti-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 11; overflow: hidden; pointer-events: none; }
+        .text-fog-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 12; background: radial-gradient(circle at center var(--vignette-y, 150%), transparent var(--circle-size, 0%), #000000 var(--fringe-size, 100%)); will-change: background; }
+        
+        .story-text { font-size: 5.5rem; font-weight: 900; font-style: italic; text-transform: uppercase; letter-spacing: -2px; line-height: 1.1; position: relative; z-index: 13; transform: scale(0.7); transition: transform 0.1s ease-out; will-change: transform, background-position; background: linear-gradient(135deg, #ffffff 0%, #ff0077 30%, #a800ff 60%, #ffffff 100%); background-size: 300% 300%; background-position: var(--scroll-text-bg, 0% 0%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        body.font-romantic .story-text { font-family: 'Great Vibes', cursive; font-style: normal; text-transform: none !important; letter-spacing: 0px !important; font-weight: 400; font-size: 7.5rem; line-height: 1.2; }
+        .story-text.quote-text { font-size: 3.5rem; letter-spacing: -1px; line-height: 1.35; max-width: 1200px; text-transform: none; background: radial-gradient(circle at center, #ffffff 15%, #ff52a1 55%, #b152ff 100%); background-size: 140% 140%; background-position: center center; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0px 4px 30px rgba(255, 0, 119, 0.12); }
+        body.font-romantic .story-text.quote-text { font-size: 4.5rem; line-height: 1.3; font-weight: 400; }
+        .story-text.final-celebration { font-size: 4.5rem; letter-spacing: 1px; line-height: 1.2; background: linear-gradient(45deg, #ffffff, #ff0077, #7000FF, #ffffff); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; animation: shineText 4s linear infinite; }
+        body.font-romantic .story-text.final-celebration { font-size: 6rem; font-weight: 400; }
+        
+        .story-confetti { position: absolute; font-size: var(--size); user-select: none; pointer-events: none; top: -10%; left: var(--x); transform: translate3d(0,0,0) rotate(0deg); animation: fallAnimation var(--speed) linear infinite; will-change: transform; }
+        @keyframes fallAnimation { 0% { transform: translate3d(0, 0, 0) rotate(0deg); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { transform: translate3d(var(--drift), 110vh, 0) rotate(var(--rotation)); opacity: 0; } }
+        @keyframes shineText { to { background-position: 200% center; } }
+        .intro-screen { position: relative; width: 100%; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: #000000; z-index: 5; }
+        .intro-glow { position: absolute; width: 750px; height: 750px; top: 50%; left: 50%; background: radial-gradient(circle, rgba(255, 255, 255, 0.10) 0%, rgba(255, 0, 119, 0.14) 25%, rgba(168, 0, 255, 0.09) 55%, rgba(0, 0, 0, 0) 75%); filter: blur(80px); pointer-events: none; z-index: 1; animation: ambientPulse 9s ease-in-out infinite alternate; will-change: transform, opacity; }
+        .intro-shine-halo { position: absolute; width: 650px; height: 650px; top: 50%; left: 50%; transform: translate(-50%, -50%); background: linear-gradient(45deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.03) 40%, rgba(255, 0, 119, 0.08) 50%, rgba(168, 0, 255, 0.03) 60%, rgba(255, 255, 255, 0) 100%); filter: blur(70px); mix-blend-mode: screen; pointer-events: none; z-index: 1; animation: ambientShineMove 8s linear infinite; will-change: transform; }
+        @keyframes ambientPulse { 0% { transform: translate(-50%, -50%) scale(0.95) translate(0px, 0px); opacity: 0.8; } 50% { transform: translate(-50%, -50%) scale(1.08) translate(-10px, 15px); opacity: 1; } 100% { transform: translate(-50%, -50%) scale(0.98) translate(15px, -10px); opacity: 0.85; } }
+        @keyframes ambientShineMove { 0% { transform: translate(-50%, -50%) rotate(0deg) scale(0.95); } 50% { transform: translate(-50%, -50%) rotate(180deg) scale(1.05); } 100% { transform: translate(-50%, -50%) rotate(360deg) scale(0.95); } }
+        .center-intro-logo-container { position: relative; z-index: 2; }
+        .center-intro-logo-container img { width: 100%; height: 100%; object-fit: contain; }
+        .intro-content-holder { position: absolute; bottom: 35px; width: 100%; display: flex; flex-direction: column; align-items: center; gap: 25px; z-index: 3; overflow: visible !important; }
+        
+        .love-counter-box { background: transparent; border: none; backdrop-filter: none; -webkit-backdrop-filter: none; padding: 0; border-radius: 0; display: flex; gap: 35px; box-shadow: none; overflow: visible !important; }
+        .counter-unit { display: flex; flex-direction: column; align-items: center; perspective: 400px; overflow: visible !important; }
+        
+        .counter-number { font-size: 3.2rem; font-weight: 900; font-style: italic; font-family: 'Inter', sans-serif; font-feature-settings: "lnum", "tnum"; display: inline-block; background: linear-gradient(135deg, #7000FF 0%, #ff0077 50%, #FF00C8 100%); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; animation: fluidBackground 6s ease infinite; will-change: transform, opacity; overflow: visible !important; padding: 10px 15px; line-height: 1.4; text-align: center; }
+        
+        .digit-pop { animation: digitBurst 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+        @keyframes digitBurst { 0% { transform: scale(0.85); opacity: 0.7; } 50% { transform: scale(1.06); opacity: 1; } 100% { transform: scale(1); opacity: 1; } }
+        .counter-label { font-size: 0.65rem; font-weight: 900; font-style: italic; text-transform: uppercase; letter-spacing: 2px; color: rgba(255, 255, 255, 0.4); margin-top: 2px; position: relative; z-index: 5; }
+        
+        /* Grup de butoane pentru Intro */
+        .intro-btn-group { display: flex; gap: 15px; z-index: 5; align-items: center; }
+
+        .intro-style-toggle-btn { width: 160px; height: 38px; display: inline-flex; align-items: center; justify-content: center; padding: 0; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); color: rgba(255, 255, 255, 0.35); font-size: 0.65rem; font-weight: 900; font-style: italic; letter-spacing: 2px; text-transform: uppercase; border-radius: 20px; cursor: pointer; backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); margin-top: 5px; font-family: 'Inter', sans-serif; box-sizing: border-box; }
+        .intro-style-toggle-btn:hover { color: rgba(255, 255, 255, 0.85); background: rgba(255, 255, 255, 0.08); border-color: rgba(255, 255, 255, 0.2); transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.4); }
+        .intro-style-toggle-btn:active { transform: scale(0.95) translateY(0); }
+        
+        /* Buton de limbă optimizat orizontal */
+        #intro-lang-toggle { width: 65px; }
+        
+        body.font-romantic .counter-number { font-family: 'Great Vibes', cursive; font-style: normal; font-weight: 400; font-size: 4.8rem; padding: 5px 15px; line-height: 1.3; }
+        body.font-romantic .counter-label, body.font-romantic .intro-style-toggle-btn, body.font-romantic .scroll-hint { font-family: 'Great Vibes', cursive; text-transform: none; font-style: normal; letter-spacing: 1px; }
+        body.font-romantic .intro-style-toggle-btn { font-weight: 400; font-size: 1.5rem; }
+        body.font-romantic .counter-label, body.font-romantic .scroll-hint { font-size: 1.4rem; }
+        
+        .scroll-hint { display: flex; flex-direction: column; align-items: center; gap: 12px; color: rgba(255, 255, 255, 0.4); font-size: 0.72rem; font-weight: 900; font-style: italic; letter-spacing: 3px; text-transform: uppercase; margin-top: 5px; }
+        .scroll-arrow-lines { width: 24px; height: 14px; position: relative; animation: arrowBounce 1.5s ease-in-out infinite; }
+        .scroll-arrow-lines::before, .scroll-arrow-lines::after { content: ''; position: absolute; top: 50%; width: 14px; height: 3px; background-color: rgba(255, 255, 255, 0.5); border-radius: 2px; }
+        .scroll-arrow-lines::before { left: 0; transform: rotate(35deg); }
+        .scroll-arrow-lines::after { right: 0; transform: rotate(-35deg); }
+        .story-trigger-track { position: relative; width: 100%; height: 85vh; background: #000000; }
+        .fade-out-pad { position: relative; width: 100%; height: 120vh; background: #000000; }
+        .gallery-zone-wrapper { position: relative; width: 100%; background: linear-gradient(135deg, #050010 0%, #12001e 35%, #2a0022 70%, #050010 100%); background-size: 400% 400%; animation: fluidBackground 18s ease infinite; padding: 220px 0 40px 0; z-index: 20; }
+        .gallery-zone-wrapper::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, #050010 0%, #7000FF 25%, #ff0077 60%, #FF00C8 90%, #7000FF 100%); background-size: 400% 400%; animation: fluidBackground 12s ease infinite; z-index: 1; opacity: 0; transition: opacity 1s cubic-bezier(0.25, 1, 0.5, 1); pointer-events: none; }
+        .gallery-zone-wrapper.light-mode::before { opacity: 1; }
+        .gallery-top-fade-mask { position: absolute; top: 0; left: 0; width: 100%; height: 450px; background: linear-gradient(to bottom, #000000 0%, rgba(0,0,0,0.8) 40%, rgba(0,0,0,0.3) 75%, transparent 100%); pointer-events: none; z-index: 25; }
+        .gallery-counter-placement { display: flex; justify-content: center; margin-bottom: 25px; position: relative; z-index: 26; overflow: visible !important; }
+        .gallery-counter-placement .counter-number { font-size: 2.6rem; }
+        body.font-romantic .gallery-counter-placement .counter-number { font-size: 4.2rem; }
+        .gallery-title { text-align: center; font-size: 2.5rem; font-weight: 900; font-style: italic; color: #ffffff; text-transform: uppercase; letter-spacing: 4px; margin-bottom: 80px; position: relative; z-index: 26; }
+        body.font-romantic .gallery-title { font-family: 'Great Vibes', cursive; text-transform: none; font-style: normal; letter-spacing: 1px; font-size: 4.5rem; }
+        .gallery-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; max-width: 1200px; margin: 0 auto; padding: 0 40px 60px 40px; position: relative; z-index: 26; }
+        .photo-placeholder { position: relative; aspect-ratio: 4/3; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 20px; overflow: hidden; display: flex; justify-content: center; align-items: center; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 20px 40px rgba(0,0,0,0.4); transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease; }
+        .photo-placeholder::before { content: 'FOTO'; font-size: 0.8rem; font-weight: 900; font-style: italic; letter-spacing: 4px; color: rgba(255, 255, 255, 0.15); background: linear-gradient(to bottom, #ffffff, rgba(255,255,255,0.3)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; transition: color 0.3s ease, transform 0.3s ease; }
+        .photo-placeholder::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, transparent 0%, rgba(255,255,255,0.03) 50%, transparent 100%); transform: translateX(-100%); transition: transform 0.5s ease; }
+        .photo-placeholder:hover { border-color: rgba(255, 255, 255, 0.2); transform: translateY(-5px); background: rgba(255, 255, 255, 0.04); }
+        .photo-placeholder:hover::before { transform: scale(1.05); }
+        .photo-placeholder:hover::after { transform: translateX(100%); }
+        
+        .scratch-container { max-width: 550px; margin: 40px auto 60px auto; position: relative; z-index: 26; padding: 0 20px; text-align: center; }
+        .scratch-card-title { font-size: 0.8rem; font-weight: 900; font-style: italic; text-transform: uppercase; letter-spacing: 3px; color: rgba(255, 255, 255, 0.6); margin-bottom: 20px; }
+        body.font-romantic .scratch-card-title { font-family: 'Great Vibes', cursive; font-style: normal; text-transform: none; font-size: 2.2rem; }
+        .scratch-card-holder { position: relative; width: 100%; aspect-ratio: 16/9; background: rgba(15, 8, 28, 0.65); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 20px; overflow: hidden; box-shadow: 0 20px 45px rgba(0,0,0,0.6); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+        .scratch-secret-message { position: absolute; inset: 0; display: flex; justify-content: center; align-items: center; padding: 30px; text-align: center; font-size: 1.2rem; font-weight: 900; font-style: italic; line-height: 1.5; color: #ffffff; background: linear-gradient(135deg, #130028 0%, #2e001f 100%); text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+        body.font-romantic .scratch-secret-message { font-family: 'Great Vibes', cursive; font-style: normal; font-weight: 400; font-size: 2.6rem; text-transform: none; letter-spacing: 0; }
+        .scratch-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; cursor: crosshair; touch-action: none; z-index: 2; transition: opacity 0.6s cubic-bezier(0.25, 1, 0.5, 1), transform 0.4s ease; }
+        
+        .capsule-wrapper { max-width: 950px; margin: 80px auto 40px auto; position: relative; z-index: 26; padding: 0 40px; text-align: center; }
+        .capsule-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 30px; }
+        .capsule-card { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 18px; padding: 35px 20px; cursor: pointer; backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 15px; min-height: 200px; position: relative; overflow: hidden; }
+        .capsule-card::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255, 0, 119, 0.15), rgba(112, 0, 255, 0.15)); opacity: 0; transition: opacity 0.4s ease; z-index: 0; }
+        .capsule-card:hover::before { opacity: 1; }
+        .capsule-card:hover { border-color: rgba(255, 255, 255, 0.25); transform: translateY(-5px); box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5); }
+        .capsule-icon { font-size: 2.2rem; position: relative; z-index: 1; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.3)); transition: transform 0.3s ease; }
+        .capsule-card:hover .capsule-icon { transform: scale(1.12) rotate(4deg); }
+        .capsule-card-title { font-size: 0.72rem; font-weight: 900; font-style: italic; text-transform: uppercase; letter-spacing: 2px; color: #ffffff; position: relative; z-index: 1; line-height: 1.4; }
+        body.font-romantic .capsule-card-title { font-family: 'Great Vibes', cursive; text-transform: none; font-size: 2.2rem; letter-spacing: 0; font-weight: 400; }
+        
+        .capsule-modal { position: fixed; inset: 0; background: rgba(4, 2, 8, 0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); z-index: 200000; display: flex; justify-content: center; align-items: center; opacity: 0; visibility: hidden; transition: opacity 0.4s ease, visibility 0.4s; padding: 20px; }
+        .capsule-modal.active { opacity: 1; visibility: visible; }
+        .capsule-modal-content { background: linear-gradient(135deg, #120924 0%, #080312 100%); border: 1px solid rgba(255, 255, 255, 0.15); max-width: 550px; width: 100%; border-radius: 24px; padding: 40px; text-align: center; box-shadow: 0 30px 70px rgba(0,0,0,0.8); transform: scale(0.9); transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1); position: relative; }
+        .capsule-modal.active .capsule-modal-content { transform: scale(1); }
+        .capsule-modal-text { font-size: 1.15rem; font-weight: 900; font-style: italic; color: #ffffff; line-height: 1.6; }
+        body.font-romantic .capsule-modal-text { font-family: 'Great Vibes', cursive; font-style: normal; font-weight: 400; font-size: 2.5rem; text-transform: none; letter-spacing: 0; }
+        .capsule-modal-close-btn { margin-top: 30px; background: #ffffff; color: #000000; border: none; padding: 12px 28px; font-family: 'Inter', sans-serif; font-weight: 900; font-style: italic; font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; border-radius: 12px; cursor: pointer; transition: background-color 0.2s, transform 0.2s; }
+        .capsule-modal-close-btn:hover { background: rgba(255,255,255,0.85); transform: scale(1.03); }
+        body.font-romantic .capsule-modal-close-btn { font-family: 'Great Vibes', cursive; text-transform: none; font-size: 1.8rem; font-weight: 400; letter-spacing: 0; padding: 4px 24px; }
+
+        .emergency-kit-wrapper { max-width: 650px; margin: 80px auto 40px auto; position: relative; z-index: 26; padding: 0 20px; text-align: center; }
+        .emergency-box-trigger { background: linear-gradient(135deg, rgba(255, 0, 119, 0.05) 0%, rgba(112, 0, 255, 0.05) 100%); border: 1px solid rgba(255, 0, 119, 0.25); border-radius: 20px; padding: 35px; cursor: pointer; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); position: relative; overflow: hidden; box-shadow: 0 10px 30px rgba(255, 0, 119, 0.05); }
+        .emergency-box-trigger::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255, 0, 119, 0.12) 0%, rgba(112, 0, 255, 0.12) 100%); opacity: 0; transition: opacity 0.4s ease; }
+        .emergency-box-trigger:hover::before { opacity: 1; }
+        .emergency-box-trigger:hover { border-color: rgba(255, 0, 119, 0.6); transform: scale(1.02); box-shadow: 0 15px 40px rgba(255, 0, 119, 0.15); }
+        .emergency-box-trigger:active { transform: scale(0.99); }
+        .emergency-title-hint { font-size: 0.72rem; font-weight: 900; font-style: italic; text-transform: uppercase; letter-spacing: 3px; color: #ff0077; margin-bottom: 12px; display: inline-block; animation: heartBeatPulse 2s infinite alternate; }
+        body.font-romantic .emergency-title-hint { font-family: 'Great Vibes', cursive; text-transform: none; font-size: 2rem; letter-spacing: 1px; font-weight: 400; }
+        .emergency-main-display { font-size: 1.15rem; font-weight: 900; font-style: italic; color: #ffffff; line-height: 1.5; transition: opacity 0.25s ease, transform 0.25s ease; }
+        body.font-romantic .emergency-main-display { font-family: 'Great Vibes', cursive; font-style: normal; font-weight: 400; font-size: 2.5rem; text-transform: none; letter-spacing: 0; }
+        @keyframes heartBeatPulse { 0% { opacity: 0.7; transform: scale(0.97); } 100% { opacity: 1; transform: scale(1.03); } }
+
+        footer { width: 100%; padding: 100px 40px 40px 40px; font-size: 0.75rem; font-weight: 900; font-style: italic; letter-spacing: 2px; text-transform: uppercase; color: #ffffff; position: relative; z-index: 26; }
+        .footer-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; width: 100%; }
+        .footer-left, .footer-center, .footer-right { flex: 1; }
+        .footer-left { text-align: left; }
+        .footer-center { text-align: center; color: #ffffff; }
+        .footer-right { text-align: right; }
+        .footer-bottom { text-align: center; color: rgba(255,255,255,0.3); font-size: 0.7rem; letter-spacing: 3px; }
+        .glitch-initials { position: relative; display: inline-block; font-weight: 900; font-style: italic; font-size: 0.85rem; letter-spacing: 3px; color: #ffffff; cursor: pointer; animation: permanentGlitch 1.2s infinite linear alternate-reverse; transition: transform 0.2s ease; }
+        .glitch-initials::before, .glitch-initials::after { content: var(--glitch-content, 'M + A'); position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: transparent; }
+        .glitch-initials::before { left: 2px; text-shadow: -2px 0 #ff0077; clip: rect(5px, 9999px, 25px, 0); animation: permanentGlitchLines 1.5s infinite linear alternate-reverse; }
+        .glitch-initials::after { left: -2px; text-shadow: -2px 0 #00ffff; clip: rect(20px, 9999px, 40px, 0); animation: permanentGlitchLines 1s infinite linear alternate-reverse; }
+        
+        .mouse-trail-particle { position: fixed; pointer-events: none; z-index: 100003; font-size: 1.1rem; transform: translate(-50%, -50%); animation: trailFade 1s cubic-bezier(0.1, 0.8, 0.3, 1) forwards; will-change: transform, opacity; }
+        @keyframes trailFade { 0% { transform: translate(-50%, -50%) scale(1) rotate(0deg); opacity: 0.9; filter: blur(0px); } 100% { transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) scale(0.2) rotate(var(--tr)); opacity: 0; filter: blur(1px); } }
+        
+        .click-particle { position: fixed; pointer-events: none; font-size: 2.2rem; z-index: 100005; transform: translate(-50%, -50%) scale(0); animation: particlePop 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+        @keyframes permanentGlitch { 0% { text-shadow: 2px 1px 0 #ff00c8, -2px -1px 0 #00ffff; transform: skew(0deg); } 15% { text-shadow: -3px 2px 0 #ff00c8, 3px -2px 0 #00ffff; transform: skew(-2deg); } 30% { text-shadow: 2px -2px 0 #7000FF, -3px 3px 0 #ffffff; transform: skew(2deg); } 45% { text-shadow: none; transform: skew(0deg); } 50% { transform: scaleY(1.1) skew(3deg); } 55% { transform: scaleY(1) skew(0deg); } 100% { text-shadow: 2px -1px 0 #ff0077, -2px 2px 0 #00ffff; transform: skew(-1deg); } }
+        @keyframes permanentGlitchLines { 0% { clip: rect(5px, 9999px, 12px, 0); } 20% { clip: rect(30px, 9999px, 38px, 0); } 40% { clip: rect(12px, 9999px, 22px, 0); } 60% { clip: rect(40px, 9999px, 48px, 0); } 80% { clip: rect(18px, 9999px, 28px, 0); } 100% { clip: rect(2px, 9999px, 10px, 0); } }
+        @keyframes fluidBackground { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        @keyframes arrowBounce { 0%, 100% { transform: translateY(0); opacity: 0.4; } 50% { transform: translateY(8px); opacity: 1; } }
+        @keyframes particlePop { 0% { transform: translate(-50%, -50%) scale(3) rotate(-20deg); opacity: 0; filter: blur(4px); } 25% { transform: translate(-50%, -50%) scale(1.1) rotate(5deg); opacity: 1; filter: blur(0); } 100% { transform: translate(calc(-50% + var(--rx)), calc(-50% - var(--ry, 60px))) scale(0.8) rotate(var(--rd)); opacity: 0; } }
+        
+        @media (max-width: 768px) {
+            .story-text { font-size: 2.3rem; letter-spacing: -1px; } 
+            .story-text.quote-text { font-size: 1.15rem; line-height: 1.45; max-width: 92%; } 
+            .story-text.final-celebration { font-size: 2.0rem; } 
+            
+            body.font-romantic .story-text { font-size: 3.2rem; } 
+            body.font-romantic .story-text.quote-text { font-size: 2.2rem; } 
+            body.font-romantic .story-text.final-celebration { font-size: 3rem; }
+            
+            .intro-content-holder { bottom: 25px; gap: 20px; } .love-counter-box { gap: 16px; } 
+            .counter-number { font-size: 2.0rem; padding: 5px 8px; } 
+            .gallery-counter-placement .counter-number { font-size: 1.7rem; } .counter-label { font-size: 0.5rem; margin-top: 2px; } .intro-style-toggle-btn { font-size: 0.55rem; padding: 6px 14px; margin-top: 2px; }
+            
+            /* Ajustare lățime pe mobil pentru butonul de limbă */
+            #intro-lang-toggle { width: 45px !important; }
+            
+            body.font-romantic .intro-style-toggle-btn { font-size: 1.2rem; }
+            body.font-romantic .counter-number { font-size: 3.2rem; padding: 5px 8px; }
+            body.font-romantic .gallery-counter-placement .counter-number { font-size: 2.8rem; }
+            body.font-romantic .counter-label, body.font-romantic .scroll-hint { font-size: 1.1rem; }
+            
+            .topbar { padding: 20px; } .logo-fixed-size { width: 110px; height: 110px; } .intro-glow { width: 380px; height: 380px; filter: blur(50px); } .intro-shine-halo { width: 300px; height: 300px; filter: blur(40px); }
+            .side-menu { width: 100%; height: 100%; max-height: 100vh; top: 0; right: -100%; transform: none; border-radius: 0; border: none; padding: 90px 30px 40px 30px; background: rgba(10, 5, 20, 0.90); backdrop-filter: blur(35px); -webkit-backdrop-filter: blur(35px); gap: 18px; }
+            .side-menu.open { right: 0; } .gallery-grid { grid-template-columns: 1fr; gap: 20px; padding: 0 20px 40px 20px; } .gallery-title { font-size: 1.8rem; margin-bottom: 50px; } body.font-romantic .gallery-title { font-size: 3.2rem; } .gallery-top-fade-mask { height: 300px; } .footer-top { flex-direction: column; gap: 15px; text-align: center; } .footer-left, .footer-center, .footer-right { text-align: center; flex: none; }
+            .scratch-container { max-width: 100%; margin: 30px auto 40px auto; } .scratch-secret-message { font-size: 1.0rem; padding: 15px; } body.font-romantic .scratch-secret-message { font-size: 2rem; }
+            .capsule-grid { grid-template-columns: 1fr; gap: 15px; } .capsule-wrapper { padding: 0 20px; margin-top: 50px; } .capsule-card { min-height: 150px; padding: 20px; } .capsule-modal-content { padding: 30px 20px; } .capsule-modal-text { font-size: 1.0rem; } body.font-romantic .capsule-modal-text { font-size: 2rem; }
+            .emergency-kit-wrapper { margin-top: 50px; } .emergency-box-trigger { padding: 25px 15px; } .emergency-main-display { font-size: 1.0rem; } body.font-romantic .emergency-main-display { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body onclick="spawnParticle(event);" onmousemove="spawnTrail(event);" ontouchmove="spawnTrail(event);">
+    <div id="loading-screen"><div class="logo-fixed-size"><div class="shine-mask"></div></div></div>
+    <div class="fixed-text-viewport" id="global-text-viewport">
+        <div class="celebration-glow" id="ambient-celebration-light"></div><div class="confetti-layer" id="story-confetti-carrier"></div><div class="text-fog-overlay" id="vignette-mask"></div>
+        <div class="text-fog-wrapper" id="text-node-carrier"><div class="story-text" id="dynamic-story-text"></div></div>
+    </div>
+    <div id="smooth-scroll-container">
+        <div class="intro-screen" id="intro-zone">
+            <div class="intro-glow"></div><div class="intro-shine-halo"></div>
+            <div class="center-intro-logo-container logo-fixed-size"><img src="https://iili.io/C3mzqT7.md.png" alt="Imagine Originală Intro"></div>
+            <div class="intro-content-holder">
+                <div class="love-counter-box">
+                    <div class="counter-unit"><span class="counter-number" id="count-days">00</span><span class="counter-label" id="lbl-unit-days">Zile</span></div>
+                    <div class="counter-unit"><span class="counter-number" id="count-hours">00</span><span class="counter-label" id="lbl-unit-hours">Ore</span></div>
+                    <div class="counter-unit"><span class="counter-number" id="count-mins">00</span><span class="counter-label" id="lbl-unit-mins">Min</span></div>
+                    <div class="counter-unit"><span class="counter-number" id="count-secs">00</span><span class="counter-label" id="lbl-unit-secs">Sec</span></div>
+                </div>
+                <div class="intro-btn-group">
+                    <button class="intro-style-toggle-btn" id="intro-font-toggle" onclick="event.stopPropagation(); toggleIntroStyle();">Caligrafic</button>
+                    <button class="intro-style-toggle-btn" id="intro-lang-toggle" onclick="event.stopPropagation(); toggleIntroLanguage();">HU</button>
+                </div>
+                <div class="scroll-hint"><span id="txt-scroll-hint">Scroll în jos</span><div class="scroll-arrow-lines"></div></div>
+            </div>
+        </div>
+        <div class="story-trigger-track" data-index="0"></div><div class="story-trigger-track" data-index="1"></div><div class="story-trigger-track" data-index="2"></div><div class="story-trigger-track" data-index="3"></div>
+        <div class="fade-out-pad" id="fade-blank-zone"></div>
+        <div class="gallery-zone-wrapper" id="app-section">
+            <div class="gallery-top-fade-mask"></div>
+            <div class="gallery-counter-placement">
+                <div class="love-counter-box">
+                    <div class="counter-unit"><span class="counter-number" id="gal-count-days">00</span><span class="counter-label" id="gal-lbl-unit-days">Zile</span></div>
+                    <div class="counter-unit"><span class="counter-number" id="gal-count-hours">00</span><span class="counter-label" id="gal-lbl-unit-hours">Ore</span></div>
+                    <div class="counter-unit"><span class="counter-number" id="gal-count-mins">00</span><span class="counter-label" id="gal-lbl-unit-mins">Min</span></div>
+                    <div class="counter-unit"><span class="counter-number" id="gal-count-secs">00</span><span class="counter-label" id="gal-lbl-unit-secs">Sec</span></div>
+                </div>
+            </div>
+            <h2 class="gallery-title" id="lbl-gallery">Amintirile Noastre</h2>
+            <div class="gallery-grid"><div class="photo-placeholder"></div><div class="photo-placeholder"></div><div class="photo-placeholder"></div><div class="photo-placeholder"></div></div>
+            
+            <div class="scratch-container">
+                <div class="scratch-card-title" id="lbl-scratch-title">Răzuiește biletul tău secret pentru azi:</div>
+                <div class="scratch-card-holder">
+                    <div class="scratch-secret-message" id="scratch-text-msg">Încarc gândul meu bun... ❤️</div>
+                    <canvas class="scratch-canvas" id="scratch-canvas"></canvas>
+                </div>
+            </div>
+
+            <div class="capsule-wrapper">
+                <div class="scratch-card-title" id="lbl-capsule-title">Capsula Timpului Virtuală</div>
+                <div class="capsule-grid">
+                    <div class="capsule-card" onclick="openTimeCapsule(1)">
+                        <span class="capsule-icon">🫂</span>
+                        <span class="capsule-card-title" id="lbl-cap-1">Când ți-e dor de mine</span>
+                    </div>
+                    <div class="capsule-card" onclick="openTimeCapsule(2)">
+                        <span class="capsule-icon">🌸</span>
+                        <span class="capsule-card-title" id="lbl-cap-2">Când ai o zi grea</span>
+                    </div>
+                    <div class="capsule-card" onclick="openTimeCapsule(3)">
+                        <span class="capsule-icon">🔒</span>
+                        <span class="capsule-card-title" id="lbl-cap-3">Aniversarea Noastră (2027)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="emergency-kit-wrapper">
+                <div class="emergency-box-trigger" onclick="triggerEmergencyKit(event)">
+                    <span class="emergency-title-hint" id="lbl-kit-hint">EMERGENCY LOVE KIT</span>
+                    <div class="emergency-main-display" id="kit-text-display">Apasă aici dacă ai nevoie de un zâmbet... ❤️</div>
+                </div>
+            </div>
+
+            <footer>
+                <div class="footer-top">
+                    <div class="footer-left"><span class="glitch-initials" id="glitch-text" onclick="triggerEasterEgg(event)">M + A</span></div>
+                    <div class="footer-center" id="text-country">Romania</div><div class="footer-right">MMXXVI</div>
+                </div>
+                <div class="footer-bottom" id="text-copyright">© UN AN ÎMPREUNĂ. TOATE DREPTURILE REZERVATE DRAGOSTEI.</div>
+            </footer>
+        </div>
+    </div>
+
+    <div class="capsule-modal" id="capsule-popup" onclick="closeTimeCapsule()">
+        <div class="capsule-modal-content" onclick="event.stopPropagation()">
+            <div class="capsule-modal-text" id="capsule-popup-content">Mesaj secret...</div>
+            <button class="capsule-modal-close-btn" onclick="closeTimeCapsule()" id="lbl-close-modal">Închide</button>
+        </div>
+    </div>
+
+    <div class="topbar" id="global-topbar">
+        <div class="logo-container" onclick="triggerEasterEgg(event)"><img src="https://iili.io/C3mzqT7.md.png" alt="Imagine Originală Navbar"></div>
+        <div class="menu-toggle" id="menu-toggle-btn" onclick="event.stopPropagation(); toggleMenu();"><div class="line line-1"></div><div class="line line-2"></div></div>
+    </div>
+    
+    <div class="side-menu" id="side-panel" onclick="event.stopPropagation();">
+        <div class="menu-section">
+            <div class="menu-label" id="lbl-stats-title">Statistici Dragoste</div>
+            <div class="love-stats-container">
+                <div class="love-stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-icon">💋</span>
+                        <span class="stat-value" id="stat-kisses">0</span>
+                        <span class="stat-name" id="lbl-stat-kisses">Săruturi</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-icon">🫂</span>
+                        <span class="stat-value" id="stat-hugs">0</span>
+                        <span class="stat-name" id="lbl-stat-hugs">Îmbrățișări</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-icon">🎵</span>
+                        <span class="stat-value" id="stat-songs">0</span>
+                        <span class="stat-name" id="lbl-stat-songs">Melodii</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="love-separator">
+            <div class="sep-line" style="--line-dir: to right;"></div>
+            <div class="sep-heart">❤️</div>
+            <div class="sep-line" style="--line-dir: to left;"></div>
+        </div>
+
+        <div class="menu-section"><div class="menu-label" id="lbl-lang">Limba</div><div class="menu-btn-group"><button class="menu-option-btn active" id="btn-ro" onclick="setLanguage('ro')">RO</button><button class="menu-option-btn" id="btn-hu" onclick="setLanguage('hu')">HU</button></div></div>
+        <div class="menu-section"><div class="menu-label" id="lbl-vibe">Control Scroll</div><div class="menu-btn-group"><button class="menu-option-btn active" id="btn-vibe-cine" onclick="setScrollVibe('cinematic')">Cinematic</button><button class="menu-option-btn" id="btn-vibe-std" onclick="setScrollVibe('standard')">Standard</button></div></div>
+        <div class="menu-section"><div class="menu-label" id="lbl-style">Stil Text</div><div class="menu-btn-group"><button class="menu-option-btn active" id="btn-font-rock" onclick="setTextStyle('modern')">Modern</button><button class="menu-option-btn" id="btn-font-rom" onclick="setTextStyle('romantic')">Caligrafic</button></div></div>
+        <div class="menu-section"><div class="menu-label" id="lbl-trail">Urmă Mouse</div><div class="menu-btn-group"><button class="menu-option-btn active" id="btn-trail-on" onclick="setTrailState(true)">Activat</button><button class="menu-option-btn" id="btn-trail-off" onclick="setTrailState(false)">Dezactivat</button></div></div>
+        <div class="menu-section"><div class="menu-label" id="lbl-effect">Efect Click</div><div class="menu-btn-group"><button class="menu-option-btn active" id="btn-fx-hearts" onclick="setClickEffect('hearts')">Inimioare ❤️</button><button class="menu-option-btn" id="btn-fx-kisses" onclick="setClickEffect('kisses')">Pupici 💋</button></div></div>
+        <div class="menu-section"><div class="menu-label" id="lbl-mode">Mod Vizual</div><div class="menu-btn-group"><button class="menu-option-btn" id="btn-mode-light" onclick="setVisualMode('light')">Light</button><button class="menu-option-btn active" id="btn-mode-dark" onclick="setVisualMode('dark')">Dark</button></div></div>
+    </div>
+    
+    <script>
+        const translations = {
+            ro: { country: "Romania", copyright: "© UN AN ÎMPREUNĂ. TOATE DREPTURILE REZERVATE DRAGOSTEI.", lblLang: "Limba", lblMode: "Mod Vizual", lblEffect: "Efect Click", scrollHint: "Scroll în jos", gallery: "Amintirile Noastre", lblVibe: "Control Scroll", lblStyle: "Stil Text", lblTrail: "Urmă Mouse", btnTrailOn: "Activat", btnTrailOff: "Dezactivat", unitDays: "Zile", unitHours: "Ore", unitMins: "Min", unitSecs: "Sec", btnModern: "Modern", btnRomantic: "Caligrafic", lblScrTitle: "Răzuiește biletul tău secret pentru azi:", 
+            lblCapsuleTitle: "Capsula Timpului Virtuală", lblCap1: "Când ți-e dor de mine", lblCap2: "Când ai o zi grea", lblCap3: "Aniversarea Noastră (2027)", lblCloseModal: "Închide", kitDefault: "Apasă aici dacă ai nevoie de un zâmbet... ❤️",
+            lblStatsTitle: "Statistici Dragoste", statKisses: "Săruturi", statHugs: "Îmbrățișări", statSongs: "Melodii",
+            capsuleReplies: {
+                missMe: "Când ți-e dor de mine, amintește-ți că suntem sub același cer și că inima mea bate doar pentru tine. Închide ochii puțin... sunt chiar acolo lângă tine, strângându-te de mână. Te iubesc enorm! 🫂❤️",
+                badDay: "Hei, zâmbește! Ești cea mai puternică și minunată persoană pe care o connoști. Ziua asta se va termina, aleasă inimii mele, dar dragostea mea pentru tine nu se va sfârși niciodată. Totul va fi bine, pui! 🌸✨",
+                futureLocked: "Hei, trișezi! 😜 Nu poți deschide scrisoarea de doi ani încă. Au mai rămas exact {days} de zile. Răbdare, iubirea mea! 🔒"
+            },
+            compliments: [
+                "Ești cel mai frumos lucru care mi s-a întâmplat vreodată! 👑",
+                "Zâmbetul tău îmi luminează instant chiar și cea mai mohorâtă zi! ☀️",
+                "Ador absolut totul la tine, ești perfectă exact așa cum ești! 🥰",
+                "Privirea ta încă îmi face inima să bată la fel de tare ca în prima zi! 💓",
+                "Ești sufletul meu pereche și cea mai bună prietenă din lume! 🗺️",
+                "Mă faci cel mai fericit bărbat din lume doar existând în viața mea! 🌹",
+                "Ai cel mai cald și bun suflet din întreg universul! ✨"
+            ],
+            scratchNotes: [
+                "Zâmbetul tău este lucrul meu preferat din întreaga lume! 🌍❤️", 
+                "Fiecare secundă cu tine e o binecuvântare primită de sus. ✨", 
+                "Ești cel mai frumos capitol din întreaga mea viață! 📖💞", 
+                "Te iubesc mai mult decât ieri și mult mai puțin decât mâine! 🌹", 
+                "Brațele tale sunt singurul loc din lume unde mă simt acasă. 🫂", 
+                "Ești absolut superbă, nu uita niciodată asta! 🥰👑",
+                "Ești dovada mea clară că fericirea chiar există în lucrurile simple. 🌸",
+                "Privirea ta îmi dă peste cap toată lumea, în cel mai frumos mod posibil! 👀❤️",
+                "În brațele tale, timpul pur și simplu stă în loc. Mulțumesc că ești a mea! ⏳💞",
+                "Nu contează unde mergem în viață, atât timp cât te am pe tine de mână. 🗺️✨",
+                "Ești piesa de puzzle care îmi întregește complet sufletul! 🧩💖",
+                "Dacă ar trebui să o iau de la capăt, tot pe tine te-am alege, de o mie de ori! 👑🌹"
+            ], texts: ["Totul a început pe 27.06.2025...", "Iar de atunci, povestea noastră crește în fiecare zi...", "Am strâns alături de tine atât de multe zile superbe, pline de momente magice, zâmbete sincere, priviri calde și îmbrățișări strânse care ne-au unit și mai mult. Chiar dacă, inevitabil, viața ne-a adus uneori și momente neutre, mici sau mari certuri și dificultăți peste care numai împreună am putut trece și le-am putut rezolva, eu tot te iubesc din ce în ce mai tare. Sper din tot sufletul și Doamne ajută să avem parte de încă mulți ani minunați și fericiți alături unul de celălalt, de acum încolo, până la moarte.", "LA MULȚI ANI ȘI TE IUBESC MULTT IUBIREA MEA ❤️✨🎉"] },
+            hu: { country: "Románia", copyright: "© EGY ÉV EGYÜTT. MINDEN JOG FENNTARTVA A SZERELEMNEK.", lblLang: "Nyelv", lblMode: "Vizuális Mód", lblEffect: "Kattintás Effekt", scrollHint: "Görgess lefele", gallery: "Emlékeink", lblVibe: "Görgetés Vezérlés", lblStyle: "Szöveg Stílusa", lblTrail: "Egér Nyomvonal", btnTrailOn: "Bekapcsolva", btnTrailOff: "Kikapcsolva", unitDays: "Nap", unitHours: "Óra", unitMins: "Perc", unitSecs: "Masp", btnModern: "Modern", btnRomantic: "Kalligrafikus", lblScrTitle: "Kaparja le a mai titkos üzenetét:", 
+            lblCapsuleTitle: "Virtuális Időkapszula", lblCap1: "Amikor hiányzom neked", lblCap2: "Amikor nehéz napod van", lblCap3: "Az Évfordulónk (2027)", lblCloseModal: "Bezárás", kitDefault: "Kattints ide ha szükséged van egy mosolyra... ❤️",
+            lblStatsTitle: "Szerelem Statisztikák", statKisses: "Csókok", statHugs: "Ölelések", statSongs: "Dalok",
+            capsuleReplies: {
+                missMe: "Amikor hiányzom, ne feledd, hogy ugyanazon ég alatt vagyunk, és a szívem csak érted dobog. Csukd be a szemed... ott vagyok melletted és fogom a kezed. Nagyon szeretlek! 🫂❤️",
+                badDay: "Fel a fejjel, mosolyogj! Te vagy a legerősebb és legcsodálatosabb ember, akit ismerek. Ez a nap véget ér, de a szerelmem irántad soha. Minden rendben lesz, kicsim! 🌸✨",
+                futureLocked: "Hé, csalsz! 😜 Még nem nyithatod meg a kétéves levelet. Pontosan {days} nap maradt hátra. Türelem, szerelmem! 🔒"
+            },
+            compliments: [
+                "Te vagy a legszebb dolog, ami valaha történt velem! 👑",
+                "A mosolyod azonnal beragyogja a legborúsabb napomat is! ☀️",
+                "Abszolút mindent imádok benned, úgy vagy tökéletes, ahogy vagy! 🥰",
+                "A tekinteted még mindig ugyanolyan hevesen megdobogtatja a szívem, mint az első napon! 💓",
+                "Te vagy a lelki társam és a legjobb barátom a világon! 🗺️",
+                "A világ legboldogabb emberévé teszel pusztán azzal, hogy létezel az életemben! 🌹",
+                "Neked van a legmelegebb és legkedvesebb lelked az egész univerzumban! ✨"
+            ],
+            scratchNotes: [
+                "A mosolyod a kedvenc dolgom az egész világon! 🌍❤️", 
+                "Minden másodperc veled egy fentről kapott áldás. ✨", 
+                "Te vagy a leggyönyörűbb fejezet az életemben! 📖💞", 
+                "Jobban szeretlek mint tegnap, de kevésbé mint holnap! 🌹", 
+                "A karjaid jelentik az egyetlen otthont számomra. 🫂", 
+                "Abszolút gyönyörű vagy, ezt soha ne feledd! 🥰👑",
+                "Te vagy a bizonyíték asa, hogy a boldogság létezik a kis dolgokban is. 🌸",
+                "A tekinteted teljesen összezavar, a legszebb módon! 👀❤️",
+                "A karjaidban az idő egyszerűen megáll. Köszönöm, hogy az enyém vagy! ⏳💞",
+                "Nem számít hová megyünk az életben, amíg fogom a kezed. 🗺️✨",
+                "Te vagy a kirakós darabja, amely teljessé teszi a lelkemet! 🧩💖",
+                "Ha elölről kellene kezdenem, akkor is téged választanálak, ezerszer is! 👑🌹"
+            ], texts: ["Minden 2025.06.27-én kezdődött...", "Azóta a mi történetünk napról napra szebbé válik...", "Rengeteg csodás, varázslatos pillanatokkal, őszinte mosolyokkal, meleg tekintetekkel és szoros ölelésekkel teli napot gyűjtöttem össze melletted, amelyek még inkább összekötöttek minket. Még ha az élet elkerülhetetlenül hozott is néha semleges pillanatokat, kisebb-nagyobb veszekedéseket és nehézségeket, amelyeken csak együtt tudtunk felülkerekedni és megoldani, én akkor is egyre jobban és jobban szeretlek. Teljes szívemből remélem, és Isten adjon rá lehetőséget, hogy még sok csodálatos és boldog évet tölthessünk el egymás mellett, mostanytól kezdve egészen a halálig.", "BOLDOG SZÜLETÉSNAPOT ÉS NAGYON SZERETLEK SZERELMEM ❤️✨🎉"] }
+        };
+        let currentLang = 'ro', activeStyle = 'modern', activeEffect = 'hearts', trailActive = true, confettiInterval = null, isMA = true, ease = 0.04, targetY = 0, currentY = 0, maxScroll = 0, mouseX = 0, mouseY = 0, textX = 0, textY = 0, trailThrottle = 0;
+        const glitchEl = document.getElementById('glitch-text'), scrollContainer = document.getElementById('smooth-scroll-container'), textViewport = document.getElementById('global-text-viewport'), vignetteMask = document.getElementById('vignette-mask'), dynamicText = document.getElementById('dynamic-story-text'), triggerTracks = document.querySelectorAll('.story-trigger-track'), fadeBlankZone = document.getElementById('fade-blank-zone'), topbar = document.getElementById('global-topbar'), appSection = document.getElementById('app-section'), celebrationLight = document.getElementById('ambient-celebration-light'), confettiPool = ['🎉', '💋', '🫂', '❤️', '✨', '💖'];
+        let prevValues = { days: "", hours: "", mins: "", secs: "" };
+
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loading-screen');
+            setTimeout(() => { loader.style.opacity = '0'; loader.style.transform = 'scale(1.15)'; setTimeout(() => { loader.style.visibility = 'hidden'; }, 1200); }, 2600);
+            updateMaxScroll(); startLoveCounter(); initScratchCard();
+        });
+        setInterval(() => { if (!glitchEl) return; isMA = !isMA; const txt = isMA ? "M + A" : "A + M"; glitchEl.innerText = txt; glitchEl.style.setProperty('--glitch-content', `"${txt}"`); }, 3000);
+        window.addEventListener('click', () => { document.getElementById('menu-toggle-btn').classList.remove('open'); document.getElementById('side-panel').classList.remove('open'); });
+        window.addEventListener('mousemove', (e) => { mouseX = (e.clientX - window.innerWidth / 2) * 0.08; mouseY = (e.clientY - window.innerHeight / 2) * 0.08; });
+        window.addEventListener('resize', () => { updateMaxScroll(); resizeScratchCanvas(); });
+        window.addEventListener('wheel', (e) => { targetY = Math.min(Math.max(targetY + e.deltaY, 0), maxScroll); }, { passive: true });
+        let touchStart = 0; window.addEventListener('touchstart', (e) => { touchStart = e.touches[0].clientY; }, { passive: true }); window.addEventListener('touchmove', (e) => { targetY = Math.min(Math.max(targetY + (touchStart - e.touches[0].clientY) * 1.4, 0), maxScroll); touchStart = e.touches[0].clientY; }, { passive: true });
+
+        function toggleMenu() { document.getElementById('menu-toggle-btn').classList.toggle('open'); document.getElementById('side-panel').classList.toggle('open'); }
+        function forceCloseMenu() { document.getElementById('menu-toggle-btn').classList.remove('open'); document.getElementById('side-panel').classList.remove('open'); }
+        
+        function toggleIntroLanguage() {
+            setLanguage(currentLang === 'ro' ? 'hu' : 'ro');
+        }
+
+        function setLanguage(lang) {
+            currentLang = lang; document.getElementById('text-country').innerText = translations[lang].country; document.getElementById('text-copyright').innerText = translations[lang].copyright; document.getElementById('lbl-lang').innerText = translations[lang].lblLang; document.getElementById('lbl-mode').innerText = translations[lang].lblMode; document.getElementById('lbl-effect').innerText = translations[lang].lblEffect; document.getElementById('txt-scroll-hint').innerText = translations[lang].scrollHint; document.getElementById('lbl-gallery').innerText = translations[lang].gallery; document.getElementById('lbl-vibe').innerText = translations[lang].lblVibe; document.getElementById('lbl-style').innerText = translations[lang].lblStyle; document.getElementById('lbl-trail').innerText = translations[lang].lblTrail;
+            document.getElementById('lbl-scratch-title').innerText = translations[lang].lblScrTitle;
+            document.getElementById('btn-trail-on').innerText = translations[lang].btnTrailOn; document.getElementById('btn-trail-off').innerText = translations[lang].btnTrailOff;
+            document.getElementById('lbl-capsule-title').innerText = translations[lang].lblCapsuleTitle;
+            document.getElementById('lbl-cap-1').innerText = translations[lang].lblCap1; document.getElementById('lbl-cap-2').innerText = translations[lang].lblCap2; document.getElementById('lbl-cap-3').innerText = translations[lang].lblCap3;
+            document.getElementById('lbl-close-modal').innerText = translations[lang].lblCloseModal;
+            document.getElementById('kit-text-display').innerText = translations[lang].kitDefault;
+            
+            document.getElementById('lbl-stats-title').innerText = translations[lang].lblStatsTitle;
+            document.getElementById('lbl-stat-kisses').innerText = translations[lang].statKisses;
+            document.getElementById('lbl-stat-hugs').innerText = translations[lang].statHugs;
+            document.getElementById('lbl-stat-songs').innerText = translations[lang].statSongs;
+
+            ['days','hours','mins','secs'].forEach(u => { document.getElementById('lbl-unit-'+u).innerText = translations[lang]['unit'+u.charAt(0).toUpperCase()+u.slice(1)]; document.getElementById('gal-lbl-unit-'+u).innerText = translations[lang]['unit'+u.charAt(0).toUpperCase()+u.slice(1)]; });
+            document.getElementById('btn-ro').classList.toggle('active', lang === 'ro'); document.getElementById('btn-hu').classList.toggle('active', lang === 'hu'); updateIntroButtonText(); pickScratchMessage(); resizeScratchCanvas(); 
+            
+            const langToggle = document.getElementById('intro-lang-toggle');
+            if (langToggle) {
+                langToggle.innerText = lang === 'ro' ? 'HU' : 'RO';
+            }
+            
+            dynamicText.innerHTML = "";
+            targetY += 0.1;
+        }
+        function setClickEffect(fx) { activeEffect = fx; document.getElementById('btn-fx-hearts').classList.toggle('active', fx === 'hearts'); document.getElementById('btn-fx-kisses').classList.toggle('active', fx === 'kisses'); }
+        function setVisualMode(m) { m === 'light' ? document.getElementById('app-section').classList.add('light-mode') : document.getElementById('app-section').classList.remove('light-mode'); document.getElementById('btn-mode-light').classList.toggle('active', m === 'light'); document.getElementById('btn-mode-dark').classList.toggle('active', m === 'dark'); initScratchCard(); }
+        function setScrollVibe(v) { ease = (v === 'standard') ? 0.09 : 0.04; document.getElementById('btn-vibe-std').classList.toggle('active', v === 'standard'); document.getElementById('btn-vibe-cine').classList.toggle('active', v !== 'standard'); }
+        
+        function setTextStyle(s) { 
+            let currentRatio = maxScroll > 0 ? (targetY / maxScroll) : 0;
+            scrollContainer.classList.add('font-switching');
+            
+            setTimeout(() => {
+                activeStyle = s; 
+                document.body.classList.toggle('font-romantic', s === 'romantic'); 
+                if(document.getElementById('btn-font-rom')) document.getElementById('btn-font-rom').classList.toggle('active', s === 'romantic'); 
+                if(document.getElementById('btn-font-rock')) document.getElementById('btn-font-rock').classList.toggle('active', s !== 'romantic'); 
+                updateIntroButtonText(); 
+                resizeScratchCanvas(); 
+                updateMaxScroll(); 
+                
+                targetY = Math.min(currentRatio * maxScroll, maxScroll);
+                currentY = targetY; 
+                scrollContainer.style.transform = `translate3d(0, ${-currentY}px, 0)`;
+                dynamicText.innerHTML = "";
+                
+                setTimeout(() => {
+                    scrollContainer.classList.remove('font-switching');
+                }, 50);
+            }, 150);
+        }
+        
+        function toggleIntroStyle() { setTextStyle(activeStyle === 'modern' ? 'romantic' : 'modern'); }
+        
+        function updateIntroButtonText() { 
+            const b = document.getElementById('intro-font-toggle'); 
+            if(b) b.innerText = activeStyle === 'modern' ? translations[currentLang].btnRomantic : translations[currentLang].btnModern; 
+            
+            const langToggle = document.getElementById('intro-lang-toggle');
+            if (langToggle && activeStyle === 'romantic') {
+                langToggle.style.fontFamily = "'Great Vibes', cursive";
+                langToggle.style.fontWeight = "400";
+                langToggle.style.fontSize = "1.5rem";
+                langToggle.style.textTransform = "none";
+                langToggle.style.letterSpacing = "1px";
+            } else if (langToggle) {
+                langToggle.style.fontFamily = "'Inter', sans-serif";
+                langToggle.style.fontWeight = "900";
+                langToggle.style.fontSize = "0.65rem";
+                langToggle.style.textTransform = "uppercase";
+                langToggle.style.letterSpacing = "2px";
+            }
+        }
+        function setTrailState(state) { trailActive = state; document.getElementById('btn-trail-on').classList.toggle('active', state); document.getElementById('btn-trail-off').classList.toggle('active', !state); }
+        function updateMaxScroll() { maxScroll = scrollContainer.getBoundingClientRect().height - window.innerHeight; }
+
+        function startLoveCounter() {
+            const start = new Date("2025-06-27T00:00:00").getTime();
+            function dom(id, val, t) { const el = document.getElementById(id); if (el && prevValues[t] !== val) { el.innerText = val; el.classList.remove('digit-pop'); void el.offsetWidth; el.classList.add('digit-pop'); } }
+            setInterval(() => {
+                const diff = new Date().getTime() - start;
+                const d = Math.floor(diff/86400000), h = Math.floor((diff%86400000)/3600000), m = Math.floor((diff%3600000)/60000), s = Math.floor((diff%60000)/1000);
+                const sd = d<10?"0"+d:""+d, sh = h<10?"0"+h:""+h, sm = m<10?"0"+m:""+m, ss = s<10?"0"+s:""+s;
+                dom("count-days", sd, "days"); dom("count-hours", sh, "hours"); dom("count-mins", sm, "mins"); dom("count-secs", ss, "secs");
+                dom("gal-count-days", sd, "days"); dom("gal-count-hours", sh, "hours"); dom("gal-count-mins", sm, "mins"); dom("gal-count-secs", ss, "secs");
+                prevValues = { days: sd, hours: sh, mins: sm, secs: ss };
+                
+                if(d > 0) {
+                    document.getElementById('stat-kisses').innerText = Math.floor(d * 5.4); 
+                    document.getElementById('stat-hugs').innerText = Math.floor(d * 4.2);
+                    document.getElementById('stat-songs').innerText = Math.floor(d * 1.8);
+                }
+            }, 1000);
+        }
+
+        function spawnConfettiParticle() {
+            const c = document.getElementById('story-confetti-carrier'); if (!c) return;
+            const p = document.createElement('div'); p.classList.add('story-confetti'); p.innerText = confettiPool[Math.floor(Math.random()*confettiPool.length)];
+            p.style.setProperty('--x', Math.random()*100+'%'); p.style.setProperty('--speed', (Math.random()*3+2.5)+'s'); p.style.setProperty('--size', (Math.random()*1.2+1)+'rem'); p.style.setProperty('--drift', (Math.random()*200-100)+'px'); p.style.setProperty('--rotation', (Math.random()*360+180)+'deg');
+            c.appendChild(p); setTimeout(() => p.remove(), 5500);
+        }
+        function startConfetti() { if (!confettiInterval) confettiInterval = setInterval(spawnConfettiParticle, 120); }
+        function stopConfetti() { if (confettiInterval) { clearInterval(confettiInterval); confettiInterval = null; } const c = document.getElementById('story-confetti-carrier'); if (c) c.innerHTML = ''; }
+
+        function spawnTrail(e) {
+            if (!trailActive) return;
+            trailThrottle++; if (trailThrottle % 3 !== 0) return;
+            const x = e.touches ? e.touches[0].clientX : e.clientX, y = e.touches ? e.touches[0].clientY : e.clientY;
+            const el = document.createElement('div'); el.classList.add('mouse-trail-particle');
+            el.innerText = activeEffect === 'hearts' ? ['❤️', '✨', '💖', '🌸'][Math.floor(Math.random()*4)] : ['💋', '✨'][Math.floor(Math.random()*2)];
+            el.style.left = x + 'px'; el.style.top = y + 'px';
+            el.style.setProperty('--tx', (Math.random()*60-30)+'px'); el.style.setProperty('--ty', (Math.random()*60-30)+'px'); el.style.setProperty('--tr', (Math.random()*180-90)+'deg');
+            document.body.appendChild(el); setTimeout(() => el.remove(), 1000);
+        }
+
+        let scratchCanvas, scratchCtx, isScratching = false;
+        function pickScratchMessage() { const list = translations[currentLang].scratchNotes; document.getElementById('scratch-text-msg').innerText = list[new Date().getDate() % list.length]; }
+        function initScratchCard() {
+            scratchCanvas = document.getElementById('scratch-canvas'); if (!scratchCanvas) return;
+            scratchCtx = scratchCanvas.getContext('2d'); resizeScratchCanvas(); pickScratchMessage();
+            scratchCanvas.addEventListener('mousedown', startScratch); scratchCanvas.addEventListener('mousemove', drawScratch); scratchCanvas.addEventListener('mouseup', endScratch);
+            scratchCanvas.addEventListener('touchstart', startScratch); scratchCanvas.addEventListener('touchmove', drawScratch); scratchCanvas.addEventListener('touchend', endScratch);
+        }
+        function resizeScratchCanvas() {
+            if (!scratchCanvas) return; const box = scratchCanvas.parentElement.getBoundingClientRect();
+            scratchCanvas.width = box.width; scratchCanvas.height = box.height;
+            const isL = document.getElementById('app-section').classList.contains('light-mode');
+            
+            const grad = scratchCtx.createLinearGradient(0, 0, scratchCanvas.width, scratchCanvas.height);
+            if (isL) {
+                grad.addColorStop(0, '#e5d1fa'); grad.addColorStop(0.5, '#d6c4e0'); grad.addColorStop(1, '#bfa8cf');
+            } else {
+                grad.addColorStop(0, '#2e1f47'); grad.addColorStop(0.5, '#1e1430'); grad.addColorStop(1, '#150d22');
+            }
+            scratchCtx.fillStyle = grad; scratchCtx.fillRect(0, 0, scratchCanvas.width, scratchCanvas.height);
+            
+            scratchCtx.fillStyle = isL ? 'rgba(0, 0, 0, 0.02)' : 'rgba(255, 255, 255, 0.015)';
+            for (let i = 0; i < scratchCanvas.width; i += 6) {
+                for (let j = 0; j < scratchCanvas.height; j += 6) {
+                    if ((i+j) % 4 === 0) scratchCtx.fillRect(i, j, 2, 2);
+                }
+            }
+
+            if(activeStyle === 'romantic') {
+                scratchCtx.font = '400 36px "Great Vibes", cursive';
+                scratchCtx.fillStyle = isL ? 'rgba(80,40,100,0.8)' : 'rgba(230,180,255,0.7)';
+            } else {
+                scratchCtx.font = '900 italic 13px Inter, sans-serif';
+                scratchCtx.fillStyle = isL ? 'rgba(0,0,0,0.35)' : 'rgba(255,255,255,0.25)';
+            }
+            scratchCtx.textAlign = 'center';
+            scratchCtx.fillText('SCRATCH HERE ❤', scratchCanvas.width/2, scratchCanvas.height/2 + 5);
+        }
+        function getScratchPos(e) { const rect = scratchCanvas.getBoundingClientRect(); const clientX = e.touches ? e.touches[0].clientX : e.clientX, clientY = e.touches ? e.touches[0].clientY : e.clientY; return { x: clientX - rect.left, y: clientY - rect.top }; }
+        function startScratch(e) { isScratching = true; scratchCtx.globalCompositeOperation = 'destination-out'; drawScratch(e); }
+        function endScratching() { isScratching = false; checkScratchPercent(); }
+        function drawScratch(e) { if (!isScratching) return; e.preventDefault(); const p = getScratchPos(e); scratchCtx.beginPath(); scratchCtx.arc(p.x, p.y, 25, 0, Math.PI * 2); scratchCtx.fill(); }
+        window.addEventListener('mouseup', endScratching); window.addEventListener('touchend', endScratching);
+        function checkScratchPercent() {
+            const img = scratchCtx.getImageData(0, 0, scratchCanvas.width, scratchCanvas.height), len = img.data.length; let clear = 0;
+            for (let i = 3; i < len; i += 4) { if (img.data[i] === 0) clear++; }
+            if ((clear / (len / 4)) > 0.45) { scratchCanvas.style.opacity = '0'; scratchCanvas.style.transform = 'scale(1.02)'; setTimeout(() => { scratchCanvas.style.display = 'none'; }, 600); }
+        }
+
+        function openTimeCapsule(id) {
+            const modal = document.getElementById('capsule-popup');
+            const content = document.getElementById('capsule-popup-content');
+            const replies = translations[currentLang].capsuleReplies;
+            
+            if (id === 1) content.innerText = replies.missMe;
+            else if (id === 2) content.innerText = replies.badDay;
+            else if (id === 3) {
+                const targetDate = new Date("2027-06-27T00:00:00").getTime();
+                const diff = targetDate - new Date().getTime();
+                const daysLeft = Math.ceil(diff / (1000 * 60 * 60 * 24));
+                content.innerText = replies.futureLocked.replace("{days}", daysLeft > 0 ? daysLeft : 0);
+            }
+            modal.classList.add('active');
+        }
+        function closeTimeCapsule() { document.getElementById('capsule-popup').classList.remove('active'); }
+
+        function triggerEmergencyKit(e) {
+            e.stopPropagation();
+            const txtDisplay = document.getElementById('kit-text-display');
+            const pool = translations[currentLang].compliments;
+            const randomCompliment = pool[Math.floor(Math.random() * pool.length)];
+            
+            txtDisplay.style.opacity = '0';
+            txtDisplay.style.transform = 'scale(0.95)';
+            
+            setTimeout(() => {
+                txtDisplay.innerText = randomCompliment;
+                txtDisplay.style.opacity = '1';
+                txtDisplay.style.transform = 'scale(1)';
+                updateMaxScroll();
+            }, 250);
+
+            const rect = e.currentTarget.getBoundingClientRect();
+            const cx = rect.left + rect.width / 2;
+            const cy = rect.top + rect.height / 2;
+            const hearts = ['❤️', '💖', '👑', '🌸', '💋', '✨', '🌹'];
+            
+            for (let i = 0; i < 15; i++) {
+                const el = document.createElement('div'); el.classList.add('click-particle');
+                el.innerText = hearts[Math.floor(Math.random() * hearts.length)];
+                el.style.left = (cx + (Math.random() * 60 - 30)) + 'px';
+                el.style.top = (cy + (Math.random() * 40 - 20)) + 'px';
+                el.style.fontSize = (Math.random() * 1 + 1.5) + 'rem';
+                el.style.setProperty('--rx', (Math.random() * 160 - 80) + 'px');
+                el.style.setProperty('--ry', (Math.random() * 100 + 40) + 'px');
+                el.style.setProperty('--rd', (Math.random() * 180 - 90) + 'deg');
+                document.body.appendChild(el);
+                setTimeout(() => el.remove(), 800);
+            }
+        }
+
+        function smoothScrollLoop() {
+            targetY = Math.min(Math.max(targetY, 0), maxScroll);
+            currentY += (targetY - currentY) * ease; 
+            scrollContainer.style.transform = `translate3d(0, ${-currentY}px, 0)`;
+            
+            let op = 0, active = false, idx = -1;
+            if (maxScroll > 0 && idx !== 2) dynamicText.style.setProperty('--scroll-text-bg', `${(currentY/maxScroll)*200}% ${(currentY/maxScroll)*50}%`);
+            
+            triggerTracks.forEach(t => {
+                const top = t.offsetTop, h = t.offsetHeight;
+                if (currentY >= top && currentY <= (top + h)) {
+                    active = true; idx = parseInt(t.getAttribute('data-index'));
+                    const raw = translations[currentLang].texts[idx];
+                    
+                    if (dynamicText.innerHTML !== raw) {
+                        dynamicText.innerHTML = raw;
+                        dynamicText.className = idx === 3 ? "story-text final-celebration" : (idx === 2 ? "story-text quote-text" : "story-text");
+                    }
+                    const prog = (currentY - top) / h, dist = Math.abs(0.5 - prog) * 2, size = (1 - dist) * 75;
+                    vignetteMask.style.setProperty('--vignette-y', `${145 - (prog * 190)}%`); vignetteMask.style.setProperty('--circle-size', `${size}%`); vignetteMask.style.setProperty('--fringe-size', `${size + (1 - dist) * 35 + 5}%`);
+                    textX += (mouseX - textX) * 0.1; textY += (mouseY - textY) * 0.1;
+                    dynamicText.style.transform = `scale(${0.72 + ((1 - dist) * 0.28)}) translate3d(${textX}px, ${textY}px, 0)`;
+                    op = prog < 0.15 ? prog / 0.15 : (prog > 0.8 ? (1 - prog) / 0.2 : 1);
+                }
+            });
+
+            if (idx === 3 && active) { startConfetti(); celebrationLight.classList.add('active'); } else { stopConfetti(); celebrationLight.classList.remove('active'); }
+            if (currentY >= fadeBlankZone.offsetTop) { op = Math.max(0, 1 - (((currentY - fadeBlankZone.offsetTop) / fadeBlankZone.offsetHeight) / 0.5)); if (op > 0) active = true; }
+            
+            if (active) { textViewport.style.opacity = op; textViewport.style.visibility = "visible"; } else { textViewport.style.opacity = 0; textViewport.style.visibility = "hidden"; }
+            if (currentY >= appSection.offsetTop - (window.innerHeight * 0.45)) { topbar.classList.add('visible'); } else { topbar.classList.remove('visible'); forceCloseMenu(); }
+            requestAnimationFrame(smoothScrollLoop);
+        }
+        requestAnimationFrame(smoothScrollLoop);
+
+        function spawnParticle(e) {
+            if (e.target.closest('#global-topbar, #glitch-text, #side-panel, .love-counter-box, #intro-font-toggle, #intro-lang-toggle, #scratch-canvas, .capsule-card, .emergency-box-trigger')) return;
+            const el = document.createElement('div'); el.classList.add('click-particle');
+            el.innerText = activeEffect === 'hearts' ? ['❤️', '💖', '💝', '💕'][Math.floor(Math.random()*4)] : '💋';
+            el.style.left = e.clientX + 'px'; el.style.top = e.clientY + 'px';
+            el.style.setProperty('--rx', (Math.random()*120-60)+'px'); el.style.setProperty('--rd', (Math.random()*60-30)+'deg');
+            document.body.appendChild(el); setTimeout(() => el.remove(), 800);
+        }
+
+        function triggerEasterEgg(e) {
+            e.stopPropagation(); document.body.style.transform = "scale(0.98)";
+            setTimeout(() => document.body.style.transform = "translate(4px, -4px) scale(1.01)", 50);
+            setTimeout(() => document.body.style.transform = "translate(-4px, 4px) scale(0.99)", 100);
+            setTimeout(() => document.body.style.transform = "translate(3px, 2px) scale(1.005)", 150);
+            setTimeout(() => document.body.style.transform = "none", 200);
+            const items = ['❤️', '💋', '💖', '🌹', '✨', '🥰', '💝'], cx = window.innerWidth/2, cy = window.innerHeight/2;
+            for (let i = 0; i < 35; i++) {
+                setTimeout(() => {
+                    const el = document.createElement('div'); el.classList.add('click-particle'); el.innerText = items[Math.floor(Math.random()*items.length)];
+                    el.style.left = cx+'px'; el.style.top = cy+'px'; el.style.fontSize = (Math.random()*1.5+2)+'rem';
+                    const a = Math.random()*Math.PI*2, v = Math.random()*250+100;
+                    el.style.setProperty('--rx', Math.cos(a)*v+'px'); el.style.setProperty('--ry', Math.sin(a)*v+'px'); el.style.setProperty('--rd', (Math.random()*360)+'deg');
+                    document.body.appendChild(el); setTimeout(() => el.remove(), 800);
+                }, i * 15);
+            }
+        }
+    </script>
+</body>
+</html>
