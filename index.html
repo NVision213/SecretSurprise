@@ -192,6 +192,14 @@
         @keyframes particlePop { 0% { transform: translate(-50%, -50%) scale(3) rotate(-20deg); opacity: 0; filter: blur(4px); } 25% { transform: translate(-50%, -50%) scale(1.1) rotate(5deg); opacity: 1; filter: blur(0); } 100% { transform: translate(calc(-50% + var(--rx)), calc(-50% - var(--ry, 60px))) scale(0.8) rotate(var(--rd)); opacity: 0; } }
         
         @media (max-width: 768px) {
+            /* DEBLOCARE SCROLL PE MOBIL + ASCUNDERE SCROLLBAR NATIV */
+            html { overflow-y: scroll !important; scrollbar-width: none !important; -ms-overflow-style: none !important; }
+            body { overflow-y: scroll !important; overflow-x: hidden !important; height: auto !important; min-height: 100vh !important; -webkit-overflow-scrolling: touch !important; position: static !important; }
+            html::-webkit-scrollbar, body::-webkit-scrollbar, *::-webkit-scrollbar { display: none !important; width: 0 !important; background: transparent !important; }
+            
+            #smooth-scroll-container { position: relative !important; transform: none !important; height: auto !important; overflow: visible !important; }
+            #menu-vibe-section { display: none !important; }
+
             .story-text { font-size: 2.3rem; letter-spacing: -1px; } 
             .story-text.quote-text { font-size: 1.15rem; line-height: 1.45; max-width: 92%; } 
             .story-text.final-celebration { font-size: 2.0rem; } 
@@ -346,7 +354,7 @@
         </div>
 
         <div class="menu-section"><div class="menu-label" id="lbl-lang">Limba</div><div class="menu-btn-group"><button class="menu-option-btn active" id="btn-ro" onclick="setLanguage('ro')">RO</button><button class="menu-option-btn" id="btn-hu" onclick="setLanguage('hu')">HU</button></div></div>
-        <div class="menu-section"><div class="menu-label" id="lbl-vibe">Control Scroll</div><div class="menu-btn-group"><button class="menu-option-btn active" id="btn-vibe-cine" onclick="setScrollVibe('cinematic')">Cinematic</button><button class="menu-option-btn" id="btn-vibe-std" onclick="setScrollVibe('standard')">Standard</button></div></div>
+        <div class="menu-section" id="menu-vibe-section"><div class="menu-label" id="lbl-vibe">Control Scroll</div><div class="menu-btn-group"><button class="menu-option-btn active" id="btn-vibe-cine" onclick="setScrollVibe('cinematic')">Cinematic</button><button class="menu-option-btn" id="btn-vibe-std" onclick="setScrollVibe('standard')">Standard</button></div></div>
         <div class="menu-section"><div class="menu-label" id="lbl-style">Stil Text</div><div class="menu-btn-group"><button class="menu-option-btn active" id="btn-font-rock" onclick="setTextStyle('modern')">Modern</button><button class="menu-option-btn" id="btn-font-rom" onclick="setTextStyle('romantic')">Caligrafic</button></div></div>
         <div class="menu-section"><div class="menu-label" id="lbl-trail">Urmă Mouse</div><div class="menu-btn-group"><button class="menu-option-btn active" id="btn-trail-on" onclick="setTrailState(true)">Activat</button><button class="menu-option-btn" id="btn-trail-off" onclick="setTrailState(false)">Dezactivat</button></div></div>
         <div class="menu-section"><div class="menu-label" id="lbl-effect">Efect Click</div><div class="menu-btn-group"><button class="menu-option-btn active" id="btn-fx-hearts" onclick="setClickEffect('hearts')">Inimioare ❤️</button><button class="menu-option-btn" id="btn-fx-kisses" onclick="setClickEffect('kisses')">Pupici 💋</button></div></div>
@@ -359,63 +367,63 @@
             lblCapsuleTitle: "Capsula Timpului Virtuală", lblCap1: "Când ți-e dor de mine", lblCap2: "Când ai o zi grea", lblCap3: "Aniversarea Noastră (2027)", lblCloseModal: "Închide", kitDefault: "Apasă aici dacă ai nevoie de un zâmbet... ❤️",
             lblStatsTitle: "Statistici Dragoste", statKisses: "Săruturi", statHugs: "Îmbrățișări", statSongs: "Melodii",
             capsuleReplies: {
-                missMe: "Când ți-e dor de mine, amintește-ți că suntem sub același cer și că inima mea bate doar pentru tine. Închide ochii puțin... sunt chiar acolo lângă tine, strângându-te de mână. Te iubesc enorm! 🫂❤️",
-                badDay: "Hei, zâmbește! Ești cea mai puternică și minunată persoană pe care o connoști. Ziua asta se va termina, aleasă inimii mele, dar dragostea mea pentru tine nu se va sfârși niciodată. Totul va fi bine, pui! 🌸✨",
-                futureLocked: "Hei, trișezi! 😜 Nu poți deschide scrisoarea de doi ani încă. Au mai rămas exact {days} de zile. Răbdare, iubirea mea! 🔒"
+                missMe: "Dacă ți-e dor de mine, să știi că mă gândeam și eu fix la tine acum. Închide ochii o secundă, sunt aici, cu tine. Te iubesc! 🫂❤️",
+                badDay: "Știu că e o zi nasoală, dar ai trecut tu prin altele și mai rele. Sunt aici pentru tine, gata să te ascult sau doar să stăm în liniște. Trecem noi și peste asta, pui! 🌸✨",
+                futureLocked: "Hopaaa, unde te grăbești? 😜 Mai ai de așteptat fix {days} zile până să citești asta. Ai răbdare! 🔒"
             },
             compliments: [
-                "Ești cel mai frumos lucru care mi s-a întâmplat vreodată! 👑",
-                "Zâmbetul tău îmi luminează instant chiar și cea mai mohorâtă zi! ☀️",
-                "Ador absolut totul la tine, ești perfectă exact așa cum ești! 🥰",
-                "Privirea ta încă îmi face inima să bată la fel de tare ca în prima zi! 💓",
-                "Ești sufletul meu pereche și cea mai bună prietenă din lume! 🗺️",
-                "Mă faci cel mai fericit bărbat din lume doar existând în viața mea! 🌹",
-                "Ai cel mai cald și bun suflet din întreg universul! ✨"
+                "Pur și simplu ador felul tău de a fi, ești cel mai fain om pe care îl știu. 👑",
+                "Când râzi cu poftă, îmi trece absolut orice supărare. ☀️",
+                "Îmi place la nebunie de tine, cu toate micile tale ciudățenii. 🥰",
+                "Mă uit la tine și uneori chiar nu-mi vine să cred ce noroc am avut. 💓",
+                "Pe lângă faptul că te iubesc la nebunie, ești și cel mai bun prieten al meu. 🗺️",
+                "Sincer, viața e mult mai mișto de când ai apărut tu în ea. 🌹",
+                "Ai o energie atât de bună, încât mă liniștești instant doar când mă iei în brațe. ✨"
             ],
             scratchNotes: [
-                "Zâmbetul tău este lucrul meu preferat din întreaga lume! 🌍❤️", 
-                "Fiecare secundă cu tine e o binecuvântare primită de sus. ✨", 
-                "Ești cel mai frumos capitol din întreaga mea viață! 📖💞", 
-                "Te iubesc mai mult decât ieri și mult mai puțin decât mâine! 🌹", 
-                "Brațele tale sunt singurul loc din lume unde mă simt acasă. 🫂", 
-                "Ești absolut superbă, nu uita niciodată asta! 🥰👑",
-                "Ești dovada mea clară că fericirea chiar există în lucrurile simple. 🌸",
-                "Privirea ta îmi dă peste cap toată lumea, în cel mai frumos mod posibil! 👀❤️",
-                "În brațele tale, timpul pur și simplu stă în loc. Mulțumesc că ești a mea! ⏳💞",
-                "Nu contează unde mergem în viață, atât timp cât te am pe tine de mână. 🗺️✨",
-                "Ești piesa de puzzle care îmi întregește complet sufletul! 🧩💖",
-                "Dacă ar trebui să o iau de la capăt, tot pe tine te-am alege, de o mie de ori! 👑🌹"
+                "Mă gândeam chiar acum la tine. Voiam doar să-ți zic asta. ✨", 
+                "Azi facem exact ce vrei tu. Fără comentarii din partea mea! 🌍❤️", 
+                "Îmi place când te pot săruta! 📖💞", 
+                "Aștept cu nerăbdare să te văd curând! 🌹", 
+                "Canapeaua, un film prost și ceva bun de mâncare. Te bagi? 🫂", 
+                "Ești mișto rău de tot, să știi. 🥰👑",
+                "Dacă nu ți-a zis nimeni azi: ești genială! 🌸",
+                "Am chef să te țin în brațe vreo 3 ore. 👀❤️",
+                "Orice ar fi azi, o rezolvăm noi. ⏳💞",
+                "Azi dau eu comanda de mâncare. Tu doar relaxează-te! 🗺️✨",
+                "Un pupic virtual, până ne vedem fizic! 🧩💖",
+                "Ești persoana mea preferată. Fără nicio concurență. 👑🌹"
             ], texts: ["Totul a început pe 27.06.2025...", "Iar de atunci, povestea noastră crește în fiecare zi...", "Am strâns alături de tine atât de multe zile superbe, pline de momente magice, zâmbete sincere, priviri calde și îmbrățișări strânse care ne-au unit și mai mult. Chiar dacă, inevitabil, viața ne-a adus uneori și momente neutre, mici sau mari certuri și dificultăți peste care numai împreună am putut trece și le-am putut rezolva, eu tot te iubesc din ce în ce mai tare. Sper din tot sufletul și Doamne ajută să avem parte de încă mulți ani minunați și fericiți alături unul de celălalt, de acum încolo, până la moarte.", "LA MULȚI ANI ȘI TE IUBESC MULTT IUBIREA MEA ❤️✨🎉"] },
             hu: { country: "Románia", copyright: "© EGY ÉV EGYÜTT. MINDEN JOG FENNTARTVA A SZERELEMNEK.", lblLang: "Nyelv", lblMode: "Vizuális Mód", lblEffect: "Kattintás Effekt", scrollHint: "Görgess lefele", gallery: "Emlékeink", lblVibe: "Görgetés Vezérlés", lblStyle: "Szöveg Stílusa", lblTrail: "Egér Nyomvonal", btnTrailOn: "Bekapcsolva", btnTrailOff: "Kikapcsolva", unitDays: "Nap", unitHours: "Óra", unitMins: "Perc", unitSecs: "Masp", btnModern: "Modern", btnRomantic: "Kalligrafikus", lblScrTitle: "Kaparja le a mai titkos üzenetét:", 
             lblCapsuleTitle: "Virtuális Időkapszula", lblCap1: "Amikor hiányzom neked", lblCap2: "Amikor nehéz napod van", lblCap3: "Az Évfordulónk (2027)", lblCloseModal: "Bezárás", kitDefault: "Kattints ide ha szükséged van egy mosolyra... ❤️",
             lblStatsTitle: "Szerelem Statisztikák", statKisses: "Csókok", statHugs: "Ölelések", statSongs: "Dalok",
             capsuleReplies: {
-                missMe: "Amikor hiányzom, ne feledd, hogy ugyanazon ég alatt vagyunk, és a szívem csak érted dobog. Csukd be a szemed... ott vagyok melletted és fogom a kezed. Nagyon szeretlek! 🫂❤️",
-                badDay: "Fel a fejjel, mosolyogj! Te vagy a legerősebb és legcsodálatosabb ember, akit ismerek. Ez a nap véget ér, de a szerelmem irántad soha. Minden rendben lesz, kicsim! 🌸✨",
-                futureLocked: "Hé, csalsz! 😜 Még nem nyithatod meg a kétéves levelet. Pontosan {days} nap maradt hátra. Türelem, szerelmem! 🔒"
+                missMe: "Ha hiányzom, tudd, hogy én is pont rád gondoltam. Csukd be a szemed egy pillanatra, itt vagyok veled. Szeretlek! 🫂❤️",
+                badDay: "Tudom, hogy ez egy rossz nap, de túl vagy te már rosszabbakon is. Itt vagyok, kész meghallgatni, vagy csak csendben ülni veled. Ezen is túljutunk, kicsim! 🌸✨",
+                futureLocked: "Hoppá, hová sietsz? 😜 Még várnod kell pontosan {days} napot, amíg ezt elolvashatod. Légy türelemmel! 🔒"
             },
             compliments: [
-                "Te vagy a legszebb dolog, ami valaha történt velem! 👑",
-                "A mosolyod azonnal beragyogja a legborúsabb napomat is! ☀️",
-                "Abszolút mindent imádok benned, úgy vagy tökéletes, ahogy vagy! 🥰",
-                "A tekinteted még mindig ugyanolyan hevesen megdobogtatja a szívem, mint az első napon! 💓",
-                "Te vagy a lelki társam és a legjobb barátom a világon! 🗺️",
-                "A világ legboldogabb emberévé teszel pusztán azzal, hogy létezel az életemben! 🌹",
-                "Neked van a legmelegebb és legkedvesebb lelked az egész univerzumban! ✨"
+                "Egyszerűen imádom amilyen vagy, te vagy a legklasszabb ember, akit ismerek. 👑",
+                "Amikor jóízűen nevetsz, minden bánatom elszáll. ☀️",
+                "Oda vagyok érted, minden apró furcsaságoddal együtt. 🥰",
+                "Rád nézek és néha el sem hiszem, milyen szerencsés vagyok. 💓",
+                "Amellett, hogy őrülten szeretlek, te vagy a legjobb barátom is. 🗺️",
+                "Őszintén, az élet sokkal jobb, mióta megjelentél benne. 🌹",
+                "Olyan jó kisugárzásod van, hogy azonnal megnyugszom, amint átölelsz. ✨"
             ],
             scratchNotes: [
-                "A mosolyod a kedvenc dolgom az egész világon! 🌍❤️", 
-                "Minden másodperc veled egy fentről kapott áldás. ✨", 
-                "Te vagy a leggyönyörűbb fejezet az életemben! 📖💞", 
-                "Jobban szeretlek mint tegnap, de kevésbé mint holnap! 🌹", 
-                "A karjaid jelentik az egyetlen otthont számomra. 🫂", 
-                "Abszolút gyönyörű vagy, ezt soha ne feledd! 🥰👑",
-                "Te vagy a bizonyíték asa, hogy a boldogság létezik a kis dolgokban is. 🌸",
-                "A tekinteted teljesen összezavar, a legszebb módon! 👀❤️",
-                "A karjaidban az idő egyszerűen megáll. Köszönöm, hogy az enyém vagy! ⏳💞",
-                "Nem számít hová megyünk az életben, amíg fogom a kezed. 🗺️✨",
-                "Te vagy a kirakós darabja, amely teljessé teszi a lelkemet! 🧩💖",
-                "Ha elölről kellene kezdenem, akkor is téged választanálak, ezerszer is! 👑🌹"
+                "Épp most gondoltam rád. Csak ezt akartam mondani. ✨", 
+                "Ma azt csináljuk, amit te akarsz. Részeemről semmi ellenvetés! 🌍❤️", 
+                "Imádom, amikor megcsókolhatlak! 📖💞", 
+                "Várom, hogy hamarosan találkozzunk. 🌹", 
+                "A kanapé, egy rossz film és valami finom kaja. Benne vagy? 🫂", 
+                "Nagyon menő vagy, tudd meg. 🥰👑",
+                "Ha ma még senki sem mondta volna: zseniális vagy! 🌸",
+                "Kedvem lenne vagy 3 órán át a karomban tartani. 👀❤️",
+                "Bármi is legyen ma, megoldjuk. ⏳💞",
+                "Ma én rendelek kaját. Te csak pihenj! 🗺️✨",
+                "Egy virtuális puszi, amíg fizikailag nem találkozunk! 🧩💖",
+                "Te vagy a kedvenc emberem. Konkurencia nélkül. 👑🌹"
             ], texts: ["Minden 2025.06.27-én kezdődött...", "Azóta a mi történetünk napról napra szebbé válik...", "Rengeteg csodás, varázslatos pillanatokkal, őszinte mosolyokkal, meleg tekintetekkel és szoros ölelésekkel teli napot gyűjtöttem össze melletted, amelyek még inkább összekötöttek minket. Még ha az élet elkerülhetetlenül hozott is néha semleges pillanatokat, kisebb-nagyobb veszekedéseket és nehézségeket, amelyeken csak együtt tudtunk felülkerekedni és megoldani, én akkor is egyre jobban és jobban szeretlek. Teljes szívemből remélem, és Isten adjon rá lehetőséget, hogy még sok csodálatos és boldog évet tölthessünk el egymás mellett, mostanytól kezdve egészen a halálig.", "BOLDOG SZÜLETÉSNAPOT ÉS NAGYON SZERETLEK SZERELMEM ❤️✨🎉"] }
         };
         let currentLang = 'ro', activeStyle = 'modern', activeEffect = 'hearts', trailActive = true, confettiInterval = null, isMA = true, ease = 0.04, targetY = 0, currentY = 0, maxScroll = 0, mouseX = 0, mouseY = 0, textX = 0, textY = 0, trailThrottle = 0;
@@ -431,8 +439,23 @@
         window.addEventListener('click', () => { document.getElementById('menu-toggle-btn').classList.remove('open'); document.getElementById('side-panel').classList.remove('open'); });
         window.addEventListener('mousemove', (e) => { mouseX = (e.clientX - window.innerWidth / 2) * 0.08; mouseY = (e.clientY - window.innerHeight / 2) * 0.08; });
         window.addEventListener('resize', () => { updateMaxScroll(); resizeScratchCanvas(); });
-        window.addEventListener('wheel', (e) => { targetY = Math.min(Math.max(targetY + e.deltaY, 0), maxScroll); }, { passive: true });
-        let touchStart = 0; window.addEventListener('touchstart', (e) => { touchStart = e.touches[0].clientY; }, { passive: true }); window.addEventListener('touchmove', (e) => { targetY = Math.min(Math.max(targetY + (touchStart - e.touches[0].clientY) * 1.4, 0), maxScroll); touchStart = e.touches[0].clientY; }, { passive: true });
+        
+        window.addEventListener('wheel', (e) => { 
+            if(window.innerWidth > 768) {
+                targetY = Math.min(Math.max(targetY + e.deltaY, 0), maxScroll); 
+            }
+        }, { passive: true });
+        
+        let touchStart = 0; 
+        window.addEventListener('touchstart', (e) => { 
+            if(window.innerWidth > 768) touchStart = e.touches[0].clientY; 
+        }, { passive: true }); 
+        window.addEventListener('touchmove', (e) => { 
+            if(window.innerWidth > 768) {
+                targetY = Math.min(Math.max(targetY + (touchStart - e.touches[0].clientY) * 1.4, 0), maxScroll); 
+                touchStart = e.touches[0].clientY; 
+            }
+        }, { passive: true });
 
         function toggleMenu() { document.getElementById('menu-toggle-btn').classList.toggle('open'); document.getElementById('side-panel').classList.toggle('open'); }
         function forceCloseMenu() { document.getElementById('menu-toggle-btn').classList.remove('open'); document.getElementById('side-panel').classList.remove('open'); }
@@ -464,14 +487,19 @@
             }
             
             dynamicText.innerHTML = "";
-            targetY += 0.1;
+            if (window.innerWidth > 768) {
+                targetY += 0.1;
+            } else {
+                window.scrollBy(0, 1);
+                window.scrollBy(0, -1);
+            }
         }
         function setClickEffect(fx) { activeEffect = fx; document.getElementById('btn-fx-hearts').classList.toggle('active', fx === 'hearts'); document.getElementById('btn-fx-kisses').classList.toggle('active', fx === 'kisses'); }
         function setVisualMode(m) { m === 'light' ? document.getElementById('app-section').classList.add('light-mode') : document.getElementById('app-section').classList.remove('light-mode'); document.getElementById('btn-mode-light').classList.toggle('active', m === 'light'); document.getElementById('btn-mode-dark').classList.toggle('active', m === 'dark'); initScratchCard(); }
         function setScrollVibe(v) { ease = (v === 'standard') ? 0.09 : 0.04; document.getElementById('btn-vibe-std').classList.toggle('active', v === 'standard'); document.getElementById('btn-vibe-cine').classList.toggle('active', v !== 'standard'); }
         
         function setTextStyle(s) { 
-            let currentRatio = maxScroll > 0 ? (targetY / maxScroll) : 0;
+            let currentRatio = maxScroll > 0 ? (currentY / maxScroll) : 0;
             scrollContainer.classList.add('font-switching');
             
             setTimeout(() => {
@@ -483,9 +511,13 @@
                 resizeScratchCanvas(); 
                 updateMaxScroll(); 
                 
-                targetY = Math.min(currentRatio * maxScroll, maxScroll);
-                currentY = targetY; 
-                scrollContainer.style.transform = `translate3d(0, ${-currentY}px, 0)`;
+                if(window.innerWidth <= 768) {
+                    window.scrollTo(0, currentRatio * maxScroll);
+                } else {
+                    targetY = Math.min(currentRatio * maxScroll, maxScroll);
+                    currentY = targetY; 
+                    scrollContainer.style.transform = `translate3d(0, ${-currentY}px, 0)`;
+                }
                 dynamicText.innerHTML = "";
                 
                 setTimeout(() => {
@@ -516,7 +548,14 @@
             }
         }
         function setTrailState(state) { trailActive = state; document.getElementById('btn-trail-on').classList.toggle('active', state); document.getElementById('btn-trail-off').classList.toggle('active', !state); }
-        function updateMaxScroll() { maxScroll = scrollContainer.getBoundingClientRect().height - window.innerHeight; }
+        
+        function updateMaxScroll() { 
+            if (window.innerWidth <= 768) {
+                maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+            } else {
+                maxScroll = scrollContainer.getBoundingClientRect().height - window.innerHeight; 
+            }
+        }
 
         function startLoveCounter() {
             const start = new Date("2025-06-27T00:00:00").getTime();
@@ -547,7 +586,9 @@
         function stopConfetti() { if (confettiInterval) { clearInterval(confettiInterval); confettiInterval = null; } const c = document.getElementById('story-confetti-carrier'); if (c) c.innerHTML = ''; }
 
         function spawnTrail(e) {
-            if (!trailActive) return;
+            // E FOARTE IMPORTANT: Dezactivam urma pe mobil complet, blocheaza scroll-ul procesand DOM-ul continuu pe "touchmove"!
+            if (!trailActive || window.innerWidth <= 768) return; 
+            
             trailThrottle++; if (trailThrottle % 3 !== 0) return;
             const x = e.touches ? e.touches[0].clientX : e.clientX, y = e.touches ? e.touches[0].clientY : e.clientY;
             const el = document.createElement('div'); el.classList.add('mouse-trail-particle');
@@ -659,9 +700,16 @@
         }
 
         function smoothScrollLoop() {
-            targetY = Math.min(Math.max(targetY, 0), maxScroll);
-            currentY += (targetY - currentY) * ease; 
-            scrollContainer.style.transform = `translate3d(0, ${-currentY}px, 0)`;
+            if (window.innerWidth <= 768) {
+                // Pe mobil luam exact cat a scrollat utilizatorul nativ pe display!
+                currentY = window.scrollY || document.documentElement.scrollTop;
+                targetY = currentY;
+                scrollContainer.style.transform = 'none'; // Impiedicam JS-ul sa blocheze vizualizarea 
+            } else {
+                targetY = Math.min(Math.max(targetY, 0), maxScroll);
+                currentY += (targetY - currentY) * ease; 
+                scrollContainer.style.transform = `translate3d(0, ${-currentY}px, 0)`;
+            }
             
             let op = 0, active = false, idx = -1;
             if (maxScroll > 0 && idx !== 2) dynamicText.style.setProperty('--scroll-text-bg', `${(currentY/maxScroll)*200}% ${(currentY/maxScroll)*50}%`);
