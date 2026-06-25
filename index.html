@@ -30,7 +30,6 @@
         .side-menu { position: fixed; top: 50%; right: -500px; transform: translateY(-50%); width: 420px; max-height: 95vh; background: rgba(10, 5, 20, 0.82); backdrop-filter: blur(35px); -webkit-backdrop-filter: blur(35px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 24px; box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8); z-index: 99999; padding: 30px; display: flex; flex-direction: column; gap: 20px; opacity: 0; visibility: hidden; overflow-y: auto; transition: right 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.4s ease, visibility 0.4s; }
         .side-menu.open { right: 40px; opacity: 1; visibility: visible; }
         
-        /* --- DESIGN NOU: LOVE STATS IN SIDE MENU --- */
         .love-stats-container { display: flex; flex-direction: column; gap: 12px; background: linear-gradient(135deg, rgba(255, 0, 119, 0.05) 0%, rgba(112, 0, 255, 0.03) 100%); border: 1px solid rgba(255, 0, 119, 0.15); border-radius: 16px; padding: 16px; margin-bottom: 5px; }
         .love-stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; text-align: center; }
         .stat-item { display: flex; flex-direction: column; align-items: center; gap: 4px; }
@@ -40,12 +39,10 @@
         body.font-romantic .stat-value { font-family: 'Great Vibes', cursive; font-size: 1.7rem; font-style: normal; -webkit-text-fill-color: #ff0077; }
         body.font-romantic .stat-name { font-family: 'Great Vibes', cursive; font-size: 1.1rem; text-transform: none; letter-spacing: 0; color: rgba(255,255,255,0.6); }
         
-        /* Delimitare frumoasa cu inimioara */
         .love-separator { display: flex; align-items: center; justify-content: center; gap: 15px; margin: 5px 0; width: 100%; }
         .love-separator .sep-line { height: 1px; flex: 1; background: linear-gradient(to var(--line-dir, right), transparent, rgba(255, 0, 119, 0.4), transparent); }
         .love-separator .sep-heart { font-size: 0.75rem; color: #ff0077; opacity: 0.8; animation: heartMiniBeat 1.6s infinite alternate ease-in-out; }
         @keyframes heartMiniBeat { 0% { transform: scale(0.9); opacity: 0.6; } 100% { transform: scale(1.15); opacity: 1; filter: drop-shadow(0 0 4px #ff0077); } }
-        /* ------------------------------------------ */
 
         .menu-section { display: flex; flex-direction: column; gap: 8px; }
         .menu-label { font-size: 0.72rem; font-weight: 900; letter-spacing: 2px; color: rgba(255, 255, 255, 0.5); text-transform: uppercase; }
@@ -89,14 +86,11 @@
         @keyframes digitBurst { 0% { transform: scale(0.85); opacity: 0.7; } 50% { transform: scale(1.06); opacity: 1; } 100% { transform: scale(1); opacity: 1; } }
         .counter-label { font-size: 0.65rem; font-weight: 900; font-style: italic; text-transform: uppercase; letter-spacing: 2px; color: rgba(255, 255, 255, 0.4); margin-top: 2px; position: relative; z-index: 5; }
         
-        /* Grup de butoane pentru Intro */
         .intro-btn-group { display: flex; gap: 15px; z-index: 5; align-items: center; }
-
         .intro-style-toggle-btn { width: 160px; height: 38px; display: inline-flex; align-items: center; justify-content: center; padding: 0; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); color: rgba(255, 255, 255, 0.35); font-size: 0.65rem; font-weight: 900; font-style: italic; letter-spacing: 2px; text-transform: uppercase; border-radius: 20px; cursor: pointer; backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); margin-top: 5px; font-family: 'Inter', sans-serif; box-sizing: border-box; }
         .intro-style-toggle-btn:hover { color: rgba(255, 255, 255, 0.85); background: rgba(255, 255, 255, 0.08); border-color: rgba(255, 255, 255, 0.2); transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.4); }
         .intro-style-toggle-btn:active { transform: scale(0.95) translateY(0); }
         
-        /* Buton de limbă optimizat orizontal */
         #intro-lang-toggle { width: 65px; }
         
         body.font-romantic .counter-number { font-family: 'Great Vibes', cursive; font-style: normal; font-weight: 400; font-size: 4.8rem; padding: 5px 15px; line-height: 1.3; }
@@ -118,15 +112,56 @@
         .gallery-counter-placement { display: flex; justify-content: center; margin-bottom: 25px; position: relative; z-index: 26; overflow: visible !important; }
         .gallery-counter-placement .counter-number { font-size: 2.6rem; }
         body.font-romantic .gallery-counter-placement .counter-number { font-size: 4.2rem; }
-        .gallery-title { text-align: center; font-size: 2.5rem; font-weight: 900; font-style: italic; color: #ffffff; text-transform: uppercase; letter-spacing: 4px; margin-bottom: 80px; position: relative; z-index: 26; }
+        .gallery-title { text-align: center; font-size: 2.5rem; font-weight: 900; font-style: italic; color: #ffffff; text-transform: uppercase; letter-spacing: 4px; margin-bottom: 30px; position: relative; z-index: 26; }
         body.font-romantic .gallery-title { font-family: 'Great Vibes', cursive; text-transform: none; font-style: normal; letter-spacing: 1px; font-size: 4.5rem; }
-        .gallery-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; max-width: 1200px; margin: 0 auto; padding: 0 40px 60px 40px; position: relative; z-index: 26; }
-        .photo-placeholder { position: relative; aspect-ratio: 4/3; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 20px; overflow: hidden; display: flex; justify-content: center; align-items: center; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 20px 40px rgba(0,0,0,0.4); transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease; }
-        .photo-placeholder::before { content: 'FOTO'; font-size: 0.8rem; font-weight: 900; font-style: italic; letter-spacing: 4px; color: rgba(255, 255, 255, 0.15); background: linear-gradient(to bottom, #ffffff, rgba(255,255,255,0.3)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; transition: color 0.3s ease, transform 0.3s ease; }
-        .photo-placeholder::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, transparent 0%, rgba(255,255,255,0.03) 50%, transparent 100%); transform: translateX(-100%); transition: transform 0.5s ease; }
-        .photo-placeholder:hover { border-color: rgba(255, 255, 255, 0.2); transform: translateY(-5px); background: rgba(255, 255, 255, 0.04); }
-        .photo-placeholder:hover::before { transform: scale(1.05); }
-        .photo-placeholder:hover::after { transform: translateX(100%); }
+        
+        .gallery-controls { display: flex; justify-content: center; margin-bottom: 40px; position: relative; z-index: 26; }
+        .gallery-sort-btn { display: inline-flex; align-items: center; gap: 8px; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.15); color: #ffffff; padding: 12px 24px; font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 900; font-style: italic; letter-spacing: 2px; text-transform: uppercase; border-radius: 30px; cursor: pointer; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); }
+        .gallery-sort-btn:hover { background: rgba(255, 255, 255, 0.12); border-color: rgba(255, 255, 255, 0.4); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.4); }
+        .gallery-sort-btn:active { transform: translateY(0) scale(0.96); }
+        body.font-romantic .gallery-sort-btn { font-family: 'Great Vibes', cursive; text-transform: none; font-style: normal; font-size: 1.8rem; letter-spacing: 0; padding: 4px 24px; font-weight: 400; }
+
+        /* --- LAYOUT COLOANE MASONRY VERTICAL CORECT (STÂNGA DIN SCHIȚĂ) --- */
+        .gallery-grid {max-width: 1250px; margin: 0 auto; padding: 0 40px 60px 40px; position: relative; z-index: 26; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; align-items: start;}
+        .gallery-item {position: relative; width: 100%; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; overflow: hidden; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 15px 35px rgba(0,0,0,0.3); cursor: pointer; transition: transform .4s cubic-bezier(.25,1,.5,1), border-color .4s ease, box-shadow .4s ease;}
+
+        .gallery-item:nth-child(3n+2){margin-top:12px}
+        .gallery-item:nth-child(3n){margin-top:6px}
+        .gallery-item:hover { transform: translateY(-6px) scale(1.02); border-color: rgba(255, 255, 255, 0.25); box-shadow: 0 25px 50px rgba(255, 0, 119, 0.15); }
+        
+        .gallery-img-container { width: 100%; height: auto; position: relative; overflow: hidden; }
+        .gallery-item img { width: 100%; height: auto; display: block; object-fit: contain; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); }
+        .gallery-item:hover img { transform: scale(1.03); }
+
+        .gallery-info { padding: 25px 20px 15px 20px; background: linear-gradient(to top, rgba(10, 5, 20, 0.9) 0%, rgba(10, 5, 20, 0.3) 70%, transparent 100%); position: absolute; bottom: 0; left: 0; width: 100%; pointer-events: none; }
+        .gallery-date { font-size: 0.68rem; font-weight: 900; font-style: italic; letter-spacing: 2px; color: rgba(255, 255, 255, 0.85); text-transform: uppercase; text-shadow: 0 2px 4px rgba(0,0,0,0.6); background: linear-gradient(45deg, #ff0077, #a800ff); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; display: inline-block; }
+        body.font-romantic .gallery-date { font-family: 'Great Vibes', cursive; font-style: normal; font-size: 1.5rem; letter-spacing: 0; -webkit-text-fill-color: #ff0077; font-weight: 400; }
+
+        .lightbox-modal { position: fixed; inset: 0; background: rgba(4, 2, 8, 0.95); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); z-index: 300000; display: flex; justify-content: center; align-items: center; opacity: 0; visibility: hidden; transition: opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1), visibility 0.5s; padding: 30px; }
+        .lightbox-modal.active { opacity: 1; visibility: visible; }
+        
+        .lightbox-card-container { width: auto; max-width: 90vw; max-height: 82vh; perspective: 1500px; cursor: pointer; position: relative; display: flex; justify-content: center; align-items: center; }
+        .lightbox-card-inner { width: 100%; height: 100%; position: relative; transform-style: preserve-3d; transition: transform 0.7s cubic-bezier(0.25, 1, 0.5, 1); display: flex; justify-content: center; align-items: center; }
+        .lightbox-card-container.flipped .lightbox-card-inner { transform: rotateY(180deg); }
+
+        .lightbox-front, .lightbox-back { border-radius: 24px; border: 1px solid rgba(255, 255, 255, 0.15); overflow: hidden; box-shadow: 0 35px 80px rgba(0,0,0,0.9); backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+        .lightbox-front { background: #000; display: flex; justify-content: center; align-items: center; width: 100%; height: 100%; }
+        .lightbox-front img { max-width: 100%; max-height: 80vh; width: auto; height: auto; display: block; object-fit: contain; pointer-events: none; border-radius: 23px; }
+
+        .lightbox-back { background: linear-gradient(135deg, #15082b 0%, #06020c 100%); transform: rotateY(180deg); display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 40px; text-align: center; position: absolute; inset: 0; width: 100%; height: 100%; box-sizing: border-box; }
+        .lightbox-back::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at center, rgba(255, 0, 119, 0.1) 0%, transparent 70%); pointer-events: none; }
+        
+        .lightbox-back-date { font-size: 0.75rem; font-weight: 900; font-style: italic; letter-spacing: 3px; text-transform: uppercase; color: #ff0077; margin-bottom: 20px; position: relative; z-index: 2; }
+        body.font-romantic .lightbox-back-date { font-family: 'Great Vibes', cursive; font-style: normal; font-size: 2.2rem; letter-spacing: 0; font-weight: 400; }
+        
+        .lightbox-story { font-size: 1.1rem; font-weight: 900; font-style: italic; color: #ffffff; line-height: 1.6; max-width: 90%; position: relative; z-index: 2; }
+        body.font-romantic .lightbox-story { font-family: 'Great Vibes', cursive; font-style: normal; font-size: 2.4rem; font-weight: 400; line-height: 1.4; letter-spacing: 0; }
+        
+        .lightbox-hint-flip { position: absolute; bottom: 20px; font-size: 0.55rem; font-weight: 900; letter-spacing: 1.5px; color: rgba(255,255,255,0.3); text-transform: uppercase; animation: heartMiniBeat 2s infinite alternate ease-in-out; }
+        body.font-romantic .lightbox-hint-flip { font-family: 'Great Vibes', cursive; font-style: normal; font-size: 1.3rem; letter-spacing: 0; text-transform: none; color: rgba(255,255,255,0.4); }
+
+        .lightbox-close-btn { position: absolute; top: 30px; right: 30px; width: 50px; height: 50px; border-radius: 50%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.15); color: #fff; font-size: 1.5rem; display: flex; justify-content: center; align-items: center; cursor: pointer; z-index: 300005; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); transition: all 0.3s ease; }
+        .lightbox-close-btn:hover { background: rgba(255,255,255,0.15); transform: scale(1.08) rotate(90deg); border-color: rgba(255,255,255,0.3); }
         
         .scratch-container { max-width: 550px; margin: 40px auto 60px auto; position: relative; z-index: 26; padding: 0 20px; text-align: center; }
         .scratch-card-title { font-size: 0.8rem; font-weight: 900; font-style: italic; text-transform: uppercase; letter-spacing: 3px; color: rgba(255, 255, 255, 0.6); margin-bottom: 20px; }
@@ -192,7 +227,6 @@
         @keyframes particlePop { 0% { transform: translate(-50%, -50%) scale(3) rotate(-20deg); opacity: 0; filter: blur(4px); } 25% { transform: translate(-50%, -50%) scale(1.1) rotate(5deg); opacity: 1; filter: blur(0); } 100% { transform: translate(calc(-50% + var(--rx)), calc(-50% - var(--ry, 60px))) scale(0.8) rotate(var(--rd)); opacity: 0; } }
         
         @media (max-width: 768px) {
-            /* DEBLOCARE SCROLL PE MOBIL + ASCUNDERE SCROLLBAR NATIV */
             html { overflow-y: scroll !important; scrollbar-width: none !important; -ms-overflow-style: none !important; }
             body { overflow-y: scroll !important; overflow-x: hidden !important; height: auto !important; min-height: 100vh !important; -webkit-overflow-scrolling: touch !important; position: static !important; }
             html::-webkit-scrollbar, body::-webkit-scrollbar, *::-webkit-scrollbar { display: none !important; width: 0 !important; background: transparent !important; }
@@ -212,7 +246,6 @@
             .counter-number { font-size: 2.0rem; padding: 5px 8px; } 
             .gallery-counter-placement .counter-number { font-size: 1.7rem; } .counter-label { font-size: 0.5rem; margin-top: 2px; } .intro-style-toggle-btn { font-size: 0.55rem; padding: 6px 14px; margin-top: 2px; }
             
-            /* Ajustare lățime pe mobil pentru butonul de limbă */
             #intro-lang-toggle { width: 45px !important; }
             
             body.font-romantic .intro-style-toggle-btn { font-size: 1.2rem; }
@@ -221,8 +254,23 @@
             body.font-romantic .counter-label, body.font-romantic .scroll-hint { font-size: 1.1rem; }
             
             .topbar { padding: 20px; } .logo-fixed-size { width: 110px; height: 110px; } .intro-glow { width: 380px; height: 380px; filter: blur(50px); } .intro-shine-halo { width: 300px; height: 300px; filter: blur(40px); }
-            .side-menu { width: 100%; height: 100%; max-height: 100vh; top: 0; right: -100%; transform: none; border-radius: 0; border: none; padding: 90px 30px 40px 30px; background: rgba(10, 5, 20, 0.90); backdrop-filter: blur(35px); -webkit-backdrop-filter: blur(35px); gap: 18px; }
-            .side-menu.open { right: 0; } .gallery-grid { grid-template-columns: 1fr; gap: 20px; padding: 0 20px 40px 20px; } .gallery-title { font-size: 1.8rem; margin-bottom: 50px; } body.font-romantic .gallery-title { font-size: 3.2rem; } .gallery-top-fade-mask { height: 300px; } .footer-top { flex-direction: column; gap: 15px; text-align: center; } .footer-left, .footer-center, .footer-right { text-align: center; flex: none; }
+            side-menu { width: 100%; height: 100%; max-height: 100vh; top: 0; right: -100%; transform: none; border-radius: 0; border: none; padding: 90px 30px 40px 30px; background: rgba(10, 5, 20, 0.90); backdrop-filter: blur(35px); -webkit-backdrop-filter: blur(35px); gap: 18px; }
+            .side-menu.open { right: 0; } 
+            
+            .gallery-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 0 20px 40px 20px;
+}
+            
+            .lightbox-card-container { max-width: 95vw !important; max-height: 75vh !important; }
+            .lightbox-front img { max-height: 70vh !important; }
+            .lightbox-back { padding: 20px; }
+            .lightbox-story { font-size: 0.95rem; }
+            body.font-romantic .lightbox-story { font-size: 1.9rem; }
+            
+            .gallery-title { font-size: 1.8rem; margin-bottom: 30px; } body.font-romantic .gallery-title { font-size: 3.2rem; } .gallery-top-fade-mask { height: 300px; } .footer-top { flex-direction: column; gap: 15px; text-align: center; } .footer-left, .footer-center, .footer-right { text-align: center; flex: none; }
             .scratch-container { max-width: 100%; margin: 30px auto 40px auto; } .scratch-secret-message { font-size: 1.0rem; padding: 15px; } body.font-romantic .scratch-secret-message { font-size: 2rem; }
             .capsule-grid { grid-template-columns: 1fr; gap: 15px; } .capsule-wrapper { padding: 0 20px; margin-top: 50px; } .capsule-card { min-height: 150px; padding: 20px; } .capsule-modal-content { padding: 30px 20px; } .capsule-modal-text { font-size: 1.0rem; } body.font-romantic .capsule-modal-text { font-size: 2rem; }
             .emergency-kit-wrapper { margin-top: 50px; } .emergency-box-trigger { padding: 25px 15px; } .emergency-main-display { font-size: 1.0rem; } body.font-romantic .emergency-main-display { font-size: 2rem; }
@@ -266,7 +314,14 @@
                 </div>
             </div>
             <h2 class="gallery-title" id="lbl-gallery">Amintirile Noastre</h2>
-            <div class="gallery-grid"><div class="photo-placeholder"></div><div class="photo-placeholder"></div><div class="photo-placeholder"></div><div class="photo-placeholder"></div></div>
+            
+            <div class="gallery-controls">
+                <button class="gallery-sort-btn" onclick="toggleGalleryOrder(event)" id="btn-gallery-sort">
+                    <span id="sort-icon">▼</span> <span id="lbl-sort-text">Cronologic (Vechi → Noi)</span>
+                </button>
+            </div>
+            
+            <div class="gallery-grid" id="dynamic-gallery-grid"></div>
             
             <div class="scratch-container">
                 <div class="scratch-card-title" id="lbl-scratch-title">Răzuiește biletul tău secret pentru azi:</div>
@@ -308,6 +363,23 @@
                 </div>
                 <div class="footer-bottom" id="text-copyright">© UN AN ÎMPREUNĂ. TOATE DREPTURILE REZERVATE DRAGOSTEI.</div>
             </footer>
+        </div>
+    </div>
+
+    <!-- LIGHTBOX SECTIUNE NOUA INTERACTIVA -->
+    <div class="lightbox-modal" id="gallery-lightbox" onclick="closeLightbox()">
+        <button class="lightbox-close-btn" onclick="closeLightbox()">&times;</button>
+        <div class="lightbox-card-container" id="lightbox-card" onclick="flipLightboxCard(event)">
+            <div class="lightbox-card-inner">
+                <div class="lightbox-front">
+                    <img src="" id="lightbox-img" alt="Lightbox Front">
+                </div>
+                <div class="lightbox-back">
+                    <span class="lightbox-back-date" id="lightbox-date-display"></span>
+                    <p class="lightbox-story" id="lightbox-story-display"></p>
+                    <span class="lightbox-hint-flip" id="lbl-lightbox-hint">Apasă pe cartonaș pentru a reveni la poză ❤️</span>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -362,14 +434,263 @@
     </div>
     
     <script>
+        const galleryImages = [
+            {
+                url: "https://iili.io/CTqSlV4.md.jpg",
+                orientation: "portrait", 
+                date: "17 Aug. 2025",
+                story: {
+                    ro: "Ce poză drăguță; ar fi frumos să avem și noi o amintire ca asta. ❤️",
+                    hu: "Milyen szép kép; jó lenne nekem is egy ilyen emlékem. ❤️"
+                }
+            },
+            {
+                url: "https://iili.io/CTqS5Rn.md.jpg",
+                orientation: "landscape",
+                date: "23 Sep. 2025",
+                story: {
+                    ro: "O dimineață interesantă înainte de a ajunge la liceu. ✨",
+                    hu: "Egy izgalmas reggel, mielőtt megérkezünk a középiskolába. ✨"
+                }
+            },
+            {
+                url: "https://iili.io/CubOqCv.md.jpg",
+                orientation: "portrait",
+                date: "5 Oct. 2025",
+                story: {
+                    ro: "O poză cu noi, cei mici, îmbrățișându-ne. 🫂",
+                    hu: "Egy kép rólunk, kicsikről, akik megöleljük egymást 🫂"
+                }
+            },
+            {
+                url: "https://iili.io/CTqSRHX.md.jpg",
+                orientation: "portrait",
+                date: "21 Nov. 2025",
+                story: {
+                    ro: "Într-o zi după facultate, stând pe o bancă, petrecând timp împreună! 😊",
+                    hu: "Egy nap a főiskola után, egy padon ülve, együtt töltve az időt! 😊"
+                }
+            },
+            {
+                url: "https://iili.io/CTqSTlI.md.jpg",
+                orientation: "landscape",
+                date: "24 Nov. 2025",
+                story: {
+                    ro: "E așa drăguț! Te iubesc! 🥰",
+                    hu: "Annyira aranyos! Szeretlek! 🥰"
+                }
+            },
+                        {
+                url: "https://iili.io/CumKAOl.md.jpg",
+                orientation: "landscape",
+                date: "28 Nov. 2025",
+                story: {
+                    ro: "Odihna înainte de pauză! 🥱",
+                    hu: "Pihenj a szünet előtt! 🥱"
+                }
+            },
+            {
+                url: "https://iili.io/CuDPUW7.md.jpg",
+                orientation: "landscape",
+                date: "28 Nov. 2025",
+                story: {
+                    ro: "O mușcătură înainte ca dragostea să te îmbrățișeze. 😋🥰",
+                    hu: "Egy falat, mielőtt a szerelem átölel. 😋🥰"
+                }
+            },
+            {
+                url: "https://iili.io/CuDPPUb.md.jpg",
+                orientation: "landscape",
+                date: "28 Nov. 2025",
+                story: {
+                    ro: "O îmbrățișare deplină, te iubesc! 🥰",
+                    hu: "Egy nagy ölelés, szeretlek! 🥰"
+                }
+            },
+            {
+                url: "https://iili.io/CTqSoVR.md.jpg",
+                orientation: "portrait",
+                date: "5 Dec. 2025",
+                story: {
+                    ro: "Cucu-bau! 🫣",
+                    hu: "Kukucs! 🫣"
+                }
+            },
+            {
+                url: "https://iili.io/CTqS2cP.md.jpg",
+                orientation: "landscape",
+                date: "5 Dec. 2025",
+                story: {
+                    ro: "Ce frumos zâmbim amândoi! ☺️",
+                    hu: "Milyen szépen mosolygunk mindketten! ☺️"
+                }
+            },
+            {
+                url: "https://iili.io/CTqS3S1.md.jpg",
+                orientation: "portrait",
+                date: "5 Dec. 2025",
+                story: {
+                    ro: "ADOR OCHII TĂI FRUMOȘI ȘI ZÂMBETUL TĂU! 🥹",
+                    hu: "IMÁDOM A GYÖNYÖRŰ SZEMED ÉS A MOSOLYOD! 🥹"
+                }
+            },
+            {
+                url: "https://iili.io/CuDPgs9.md.jpg",
+                orientation: "portrait",
+                date: "5 Dec. 2026",
+                story: {
+                    ro: "IUI! Ce draguti suntem aici! ❤️",
+                    hu: "O! de aranyosak vagyunk mi itt! ❤️"
+                }
+            },
+            {
+                url: "https://iili.io/CumjAzJ.md.jpg",
+                orientation: "portrait",
+                date: "2 Jan. 2026",
+                story: {
+                    ro: "Pe hol în pauză, făcându-ne un selfie amândoi zâmbind! 😚",
+                    hu: "A szünetben a folyosón, egy szelfit készítettünk mindketten mosolyogva! 😚"
+                }
+            },
+            {
+                url: "https://iili.io/CTqSKHF.md.jpg",
+                orientation: "landscape",
+                date: "23 Jan. 2026",
+                story: {
+                    ro: "😊😛",
+                    hu: "😊😛"
+                }
+            },
+            {
+                url: "https://iili.io/CTqSfAg.md.jpg",
+                orientation: "portrait",
+                date: "26 Jan. 2026",
+                story: {
+                    ro: "Ce goofy și drăguț! 🤗",
+                    hu: "Milyen vicces és aranyos! 🤗"
+                }
+            },
+            {
+                url: "https://iili.io/Cutpyba.md.jpg",
+                orientation: "portrait",
+                date: "9 Feb. 2026",
+                story: {
+                    ro: "Cealalta jumatate! 🫶",
+                    hu: "A másik fele! 🫶"
+                }
+            },
+            {
+                url: "https://iili.io/CumKas9.md.jpg",
+                orientation: "portrait",
+                date: "10 Feb. 2026",
+                story: {
+                    ro: "Un pupic rapid înainte de oră. 💋",
+                    hu: "Egy gyors csók óra előtt. 💋"
+                }
+            },
+            {
+                url: "https://iili.io/CutpZ0B.md.jpg",
+                orientation: "portrait",
+                date: "14 Feb. 2026",
+                story: {
+                    ro: "La începutul unei zile speciale mult așteptate! ❤️",
+                    hu: "Egy régóta várt különleges nap kezdetén! ❤️"
+                }
+            },
+            {
+                url: "https://iili.io/CuDRq2S.md.jpg",
+                orientation: "portrait",
+                date: "14 Feb. 2026",
+                story: {
+                    ro: "Și cu un Lego și cu o amintire! 🤗❤️",
+                    hu: "És egy Legóval és egy emlékkel! 🤗❤️"
+                }
+            },
+            {
+                url: "https://iili.io/Cutp8U7.md.jpg",
+                orientation: "portrait",
+                date: "26 Feb. 2026",
+                story: {
+                    ro: "A fost o zi foarte interesantă aici, dar și cu priveliște superbă! 😉😍",
+                    hu: "Nagyon érdekes nap volt itt, de gyönyörű kilátással is! 😉😍"
+                }
+            },
+            {
+                url: "https://iili.io/Cutpkf2.md.jpg",
+                orientation: "portrait",
+                date: "7 Apr. 2026",
+                story: {
+                    ro: "O plimbare relaxantă până la cascadă! 🎉",
+                    hu: "Pihentető séta a vízeséshez! 🎉"
+                }
+            },
+            {
+                url: "https://iili.io/CutplPp.md.jpg",
+                orientation: "portrait",
+                date: "9 May 2026",
+                story: {
+                    ro: "Amândoi îmbrăcați frumos, ca întotdeauna.! 😎❤️",
+                    hu: "Mindketten szépen felöltözve, mint mindig! 😎❤️"
+                }
+            },
+            {
+                url: "https://iili.io/Cutp5Na.md.jpg",
+                orientation: "portrait",
+                date: "9 May 2026",
+                story: {
+                    ro: "Și niște zâmbete frumoase, de asemenea! 😁❤️",
+                    hu: "És néhány gyönyörű mosoly is! 😁❤️"
+                }
+            },
+            {
+                url: "https://iili.io/CutpRAg.md.jpg",
+                orientation: "portrait",
+                date: "9 May 2026",
+                story: {
+                    ro: "În sfârșit, prin mall, stând și relaxându-ne împreună! ☺️",
+                    hu: "Végül, a bevásárlóközpontban, együtt ülve és pihenve! ☺️"
+                }
+            },
+            {
+                url: "https://iili.io/Cutp7DJ.md.jpg",
+                orientation: "portrait",
+                date: "15 May 2026",
+                story: {
+                    ro: "Frumusețea ta mă captivează complet. 😯🔥",
+                    hu: "A szépséged teljesen elvarázsol. 😯🔥"
+                }
+            },
+            {
+                url: "https://iili.io/CumKYW7.md.jpg",
+                orientation: "portrait",
+                date: "18 Jun. 2026",
+                story: {
+                    ro: "Păr Check, Selfie tip tată balkan Check! 😂",
+                    hu: "Haj, Check! Balkáni fater szelfi, Check! 😂"
+                }
+            },
+            {
+                url: "https://iili.io/CumK7xS.md.jpg",
+                orientation: "portrait",
+                date: "19 Jun. 2026",
+                story: {
+                    ro: "Te iubesc atât de mult! Iubesc când ne sărutăm! 💋🤗",
+                    hu: "A legfrissebb emlékünk egy végtelen szerelemmel teli évből! Boldog évfordulót nekünk! 💋🤗"
+                }
+            }
+        ];
+
+        let isChronological = true;
+
         const translations = {
             ro: { country: "Romania", copyright: "© UN AN ÎMPREUNĂ. TOATE DREPTURILE REZERVATE DRAGOSTEI.", lblLang: "Limba", lblMode: "Mod Vizual", lblEffect: "Efect Click", scrollHint: "Scroll în jos", gallery: "Amintirile Noastre", lblVibe: "Control Scroll", lblStyle: "Stil Text", lblTrail: "Urmă Mouse", btnTrailOn: "Activat", btnTrailOff: "Dezactivat", unitDays: "Zile", unitHours: "Ore", unitMins: "Min", unitSecs: "Sec", btnModern: "Modern", btnRomantic: "Caligrafic", lblScrTitle: "Răzuiește biletul tău secret pentru azi:", 
             lblCapsuleTitle: "Capsula Timpului Virtuală", lblCap1: "Când ți-e dor de mine", lblCap2: "Când ai o zi grea", lblCap3: "Aniversarea Noastră (2027)", lblCloseModal: "Închide", kitDefault: "Apasă aici dacă ai nevoie de un zâmbet... ❤️",
             lblStatsTitle: "Statistici Dragoste", statKisses: "Săruturi", statHugs: "Îmbrățișări", statSongs: "Melodii",
+            sortOldest: "Cronologic (Vechi → Noi)", sortNewest: "Anticronologic (Noi → Vechi)", hintFlip: "Apasă pe cartonaș pentru a reveni la poză ❤️", hintBack: "Apasă pe poză pentru povestea ei ✨",
             capsuleReplies: {
                 missMe: "Dacă ți-e dor de mine, să știi că mă gândeam și eu fix la tine acum. Închide ochii o secundă, sunt aici, cu tine. Te iubesc! 🫂❤️",
                 badDay: "Știu că e o zi nasoală, dar ai trecut tu prin altele și mai rele. Sunt aici pentru tine, gata să te ascult sau doar să stăm în liniște. Trecem noi și peste asta, pui! 🌸✨",
-                futureLocked: "Hopaaa, unde te grăbești? 😜 Mai ai de așteptat fix {days} zile până să citești asta. Ai răbdare! 🔒"
+                futureLocked: "Hopaaa, onde te grăbești? 😜 Mai ai de așteptat fix {days} zile până să citești asta. Ai răbdare! 🔒"
             },
             compliments: [
                 "Pur și simplu ador felul tău de a fi, ești cel mai fain om pe care îl știu. 👑",
@@ -382,10 +703,10 @@
             ],
             scratchNotes: [
                 "Mă gândeam chiar acum la tine. Voiam doar să-ți zic asta. ✨", 
-                "Azi facem exact ce vrei tu. Fără comentarii din partea mea! 🌍❤️", 
+                "Sper să ai o zi minunată și fără griji astăzi! 🌍❤️", 
                 "Îmi place când te pot săruta! 📖💞", 
                 "Aștept cu nerăbdare să te văd curând! 🌹", 
-                "Canapeaua, un film prost și ceva bun de mâncare. Te bagi? 🫂", 
+                "Canapeaua, un film bun și ceva bun de mâncare. Te bagi? 🫂", 
                 "Ești mișto rău de tot, să știi. 🥰👑",
                 "Dacă nu ți-a zis nimeni azi: ești genială! 🌸",
                 "Am chef să te țin în brațe vreo 3 ore. 👀❤️",
@@ -393,19 +714,20 @@
                 "Azi dau eu comanda de mâncare. Tu doar relaxează-te! 🗺️✨",
                 "Un pupic virtual, până ne vedem fizic! 🧩💖",
                 "Ești persoana mea preferată. Fără nicio concurență. 👑🌹"
-            ], texts: ["Totul a început pe 27.06.2025...", "Iar de atunci, povestea noastră crește în fiecare zi...", "Am strâns alături de tine atât de multe zile superbe, pline de momente magice, zâmbete sincere, priviri calde și îmbrățișări strânse care ne-au unit și mai mult. Chiar dacă, inevitabil, viața ne-a adus uneori și momente neutre, mici sau mari certuri și dificultăți peste care numai împreună am putut trece și le-am putut rezolva, eu tot te iubesc din ce în ce mai tare. Sper din tot sufletul și Doamne ajută să avem parte de încă mulți ani minunați și fericiți alături unul de celălalt, de acum încolo, până la moarte.", "LA MULȚI ANI ȘI TE IUBESC MULTT IUBIREA MEA ❤️✨🎉"] },
+            ], texts: ["Totul a început pe 27.06.2025...", "Iar de atunci, povestea noastră crește în fiecare zi...", "Am strâns alături de tine atât de multe zile superbe, pline de moments magice, zâmbete sincere, priviri calde și îmbrățișări strânse care ne-au unit și mai mult. Chiar dacă, inevitabil, viața ne-a adus uneori și momente neutre, mici sau mari certuri și dificultăți peste care numai împreună am putut trece și le-am putut rezolva, eu tot te iubesc din ce în ce mai tare. Sper din tot sufletul și Doamne ajută să avem parte de încă multi ani minunați și fericiți alături unul de celălalt, de acum încolo, până la moarte.", "LA MULȚI ANI ȘI TE IUBESC MULTT IUBIREA MEA ❤️✨🎉"] },
             hu: { country: "Románia", copyright: "© EGY ÉV EGYÜTT. MINDEN JOG FENNTARTVA A SZERELEMNEK.", lblLang: "Nyelv", lblMode: "Vizuális Mód", lblEffect: "Kattintás Effekt", scrollHint: "Görgess lefele", gallery: "Emlékeink", lblVibe: "Görgetés Vezérlés", lblStyle: "Szöveg Stílusa", lblTrail: "Egér Nyomvonal", btnTrailOn: "Bekapcsolva", btnTrailOff: "Kikapcsolva", unitDays: "Nap", unitHours: "Óra", unitMins: "Perc", unitSecs: "Masp", btnModern: "Modern", btnRomantic: "Kalligrafikus", lblScrTitle: "Kaparja le a mai titkos üzenetét:", 
             lblCapsuleTitle: "Virtuális Időkapszula", lblCap1: "Amikor hiányzom neked", lblCap2: "Amikor nehéz napod van", lblCap3: "Az Évfordulónk (2027)", lblCloseModal: "Bezárás", kitDefault: "Kattints ide ha szükséged van egy mosolyra... ❤️",
             lblStatsTitle: "Szerelem Statisztikák", statKisses: "Csókok", statHugs: "Ölelések", statSongs: "Dalok",
+            sortOldest: "Kronologikus (Régi → Új)", sortNewest: "Antikronologikus (Új → Régi)", hintFlip: "Kattints a kártyára a képhez való visszatéréshez ❤️", hintBack: "Kattints a képre a történetért ✨",
             capsuleReplies: {
-                missMe: "Ha hiányzom, tudd, hogy én is pont rád gondoltam. Csukd be a szemed egy pillanatra, itt vagyok veled. Szeretlek! 🫂❤️",
+                missMe: "Ha hiányzom, tudd, hogy én is pont rád gondoltam. Csukd be a szemed egy pillanatra, aici vagyok veled. Szeretlek! 🫂❤️",
                 badDay: "Tudom, hogy ez egy rossz nap, de túl vagy te már rosszabbakon is. Itt vagyok, kész meghallgatni, vagy csak csendben ülni veled. Ezen is túljutunk, kicsim! 🌸✨",
                 futureLocked: "Hoppá, hová sietsz? 😜 Még várnod kell pontosan {days} napot, amíg ezt elolvashatod. Légy türelemmel! 🔒"
             },
             compliments: [
                 "Egyszerűen imádom amilyen vagy, te vagy a legklasszabb ember, akit ismerek. 👑",
                 "Amikor jóízűen nevetsz, minden bánatom elszáll. ☀️",
-                "Oda vagyok érted, minden apró furcsaságoddal együtt. 🥰",
+                "Oda vagyok érted, minden apró furcsasággal együtt. 🥰",
                 "Rád nézek és néha el sem hiszem, milyen szerencsés vagyok. 💓",
                 "Amellett, hogy őrülten szeretlek, te vagy a legjobb barátom is. 🗺️",
                 "Őszintén, az élet sokkal jobb, mióta megjelentél benne. 🌹",
@@ -413,7 +735,7 @@
             ],
             scratchNotes: [
                 "Épp most gondoltam rád. Csak ezt akartam mondani. ✨", 
-                "Ma azt csináljuk, amit te akarsz. Részeemről semmi ellenvetés! 🌍❤️", 
+                "Remélem, ma csodálatos és gondtalan napod lesz! 🌍❤️", 
                 "Imádom, amikor megcsókolhatlak! 📖💞", 
                 "Várom, hogy hamarosan találkozzunk. 🌹", 
                 "A kanapé, egy rossz film és valami finom kaja. Benne vagy? 🫂", 
@@ -424,7 +746,7 @@
                 "Ma én rendelek kaját. Te csak pihenj! 🗺️✨",
                 "Egy virtuális puszi, amíg fizikailag nem találkozunk! 🧩💖",
                 "Te vagy a kedvenc emberem. Konkurencia nélkül. 👑🌹"
-            ], texts: ["Minden 2025.06.27-én kezdődött...", "Azóta a mi történetünk napról napra szebbé válik...", "Rengeteg csodás, varázslatos pillanatokkal, őszinte mosolyokkal, meleg tekintetekkel és szoros ölelésekkel teli napot gyűjtöttem össze melletted, amelyek még inkább összekötöttek minket. Még ha az élet elkerülhetetlenül hozott is néha semleges pillanatokat, kisebb-nagyobb veszekedéseket és nehézségeket, amelyeken csak együtt tudtunk felülkerekedni és megoldani, én akkor is egyre jobban és jobban szeretlek. Teljes szívemből remélem, és Isten adjon rá lehetőséget, hogy még sok csodálatos és boldog évet tölthessünk el egymás mellett, mostanytól kezdve egészen a halálig.", "BOLDOG SZÜLETÉSNAPOT ÉS NAGYON SZERETLEK SZERELMEM ❤️✨🎉"] }
+            ], texts: ["Minden 2025.06.27-én kezdődött...", "Azóta a mi történetünk napról napra szebbé válik...", "Rengeteg csodás, varázslatos pillanatokkal, őszinte mosolyokkal, meleg tekintetekkel és szoros ölelésekkel teli napot gyűjtöttem össze melletted, amelyek még inkább összekötöttek minket. Még ha az élet elkerülhetetlenül hozott is néha semleges pillanatokat, kisebb-nagyobb veszekedéseket és nehézségeket, amelyeken csak együtt tudtunk felülkerekedni és megoldani, én akkor is egyre jobban és jobban szeretlek. Teljes szívemből remélem, and Isten adjon rá lehetőséget, hogy még sok csodálatos és boldog évet tölthessünk el egymás mellett, mostanytól kezdve egészen a halálig.", "BOLDOG SZÜLETÉSNAPOT ÉS NAGYON SZERETLEK SZERELMEM ❤️✨🎉"] }
         };
         let currentLang = 'ro', activeStyle = 'modern', activeEffect = 'hearts', trailActive = true, confettiInterval = null, isMA = true, ease = 0.04, targetY = 0, currentY = 0, maxScroll = 0, mouseX = 0, mouseY = 0, textX = 0, textY = 0, trailThrottle = 0;
         const glitchEl = document.getElementById('glitch-text'), scrollContainer = document.getElementById('smooth-scroll-container'), textViewport = document.getElementById('global-text-viewport'), vignetteMask = document.getElementById('vignette-mask'), dynamicText = document.getElementById('dynamic-story-text'), triggerTracks = document.querySelectorAll('.story-trigger-track'), fadeBlankZone = document.getElementById('fade-blank-zone'), topbar = document.getElementById('global-topbar'), appSection = document.getElementById('app-section'), celebrationLight = document.getElementById('ambient-celebration-light'), confettiPool = ['🎉', '💋', '🫂', '❤️', '✨', '💖'];
@@ -432,9 +754,21 @@
 
         window.addEventListener('load', () => {
             const loader = document.getElementById('loading-screen');
-            setTimeout(() => { loader.style.opacity = '0'; loader.style.transform = 'scale(1.15)'; setTimeout(() => { loader.style.visibility = 'hidden'; }, 1200); }, 2600);
-            updateMaxScroll(); startLoveCounter(); initScratchCard();
+            setTimeout(() => { 
+                loader.style.opacity = '0'; 
+                loader.style.transform = 'scale(1.15)'; 
+                setTimeout(() => { loader.style.visibility = 'hidden'; }, 1200); 
+            }, 2600);
+            
+            renderGallery();
+            startLoveCounter(); 
+            initScratchCard(); 
+            
+            setTimeout(() => {
+                updateMaxScroll();
+            }, 300);
         });
+
         setInterval(() => { if (!glitchEl) return; isMA = !isMA; const txt = isMA ? "M + A" : "A + M"; glitchEl.innerText = txt; glitchEl.style.setProperty('--glitch-content', `"${txt}"`); }, 3000);
         window.addEventListener('click', () => { document.getElementById('menu-toggle-btn').classList.remove('open'); document.getElementById('side-panel').classList.remove('open'); });
         window.addEventListener('mousemove', (e) => { mouseX = (e.clientX - window.innerWidth / 2) * 0.08; mouseY = (e.clientY - window.innerHeight / 2) * 0.08; });
@@ -477,9 +811,11 @@
             document.getElementById('lbl-stat-kisses').innerText = translations[lang].statKisses;
             document.getElementById('lbl-stat-hugs').innerText = translations[lang].statHugs;
             document.getElementById('lbl-stat-songs').innerText = translations[lang].statSongs;
+            
+            document.getElementById('lbl-lightbox-hint').innerText = translations[lang].hintFlip;
 
             ['days','hours','mins','secs'].forEach(u => { document.getElementById('lbl-unit-'+u).innerText = translations[lang]['unit'+u.charAt(0).toUpperCase()+u.slice(1)]; document.getElementById('gal-lbl-unit-'+u).innerText = translations[lang]['unit'+u.charAt(0).toUpperCase()+u.slice(1)]; });
-            document.getElementById('btn-ro').classList.toggle('active', lang === 'ro'); document.getElementById('btn-hu').classList.toggle('active', lang === 'hu'); updateIntroButtonText(); pickScratchMessage(); resizeScratchCanvas(); 
+            document.getElementById('btn-ro').classList.toggle('active', lang === 'ro'); document.getElementById('btn-hu').classList.toggle('active', lang === 'hu'); updateIntroButtonText(); pickScratchMessage(); resizeScratchCanvas(); updateSortButtonUI();
             
             const langToggle = document.getElementById('intro-lang-toggle');
             if (langToggle) {
@@ -566,7 +902,7 @@
                 const sd = d<10?"0"+d:""+d, sh = h<10?"0"+h:""+h, sm = m<10?"0"+m:""+m, ss = s<10?"0"+s:""+s;
                 dom("count-days", sd, "days"); dom("count-hours", sh, "hours"); dom("count-mins", sm, "mins"); dom("count-secs", ss, "secs");
                 dom("gal-count-days", sd, "days"); dom("gal-count-hours", sh, "hours"); dom("gal-count-mins", sm, "mins"); dom("gal-count-secs", ss, "secs");
-                prevValues = { days: sd, hours: sh, mins: sm, secs: ss };
+                prevValues = { days: sd, hours: sh, mins: sm, ss };
                 
                 if(d > 0) {
                     document.getElementById('stat-kisses').innerText = Math.floor(d * 5.4); 
@@ -574,6 +910,101 @@
                     document.getElementById('stat-songs').innerText = Math.floor(d * 1.8);
                 }
             }, 1000);
+        }
+
+        function renderGallery() {
+
+    const grid = document.getElementById('dynamic-gallery-grid');
+
+    if (!grid) return;
+
+    grid.innerHTML = "";
+
+    let itemsToRender = [...galleryImages];
+
+    if (!isChronological) {
+        itemsToRender.reverse();
+    }
+
+    itemsToRender.forEach((imgData) => {
+
+        const item = document.createElement('div');
+
+        item.className=`gallery-item ${imgData.orientation||''}`;
+
+        const realIndex = galleryImages.indexOf(imgData);
+
+        item.onclick = (event) => {
+            openLightbox(realIndex, event);
+        };
+
+        item.innerHTML = `
+            <div class="gallery-img-container">
+                <img
+                    src="${imgData.url}"
+                    alt="Amintire ${realIndex + 1}"
+                    loading="lazy"
+                    onload="updateMaxScroll()"
+                >
+            </div>
+
+            <div class="gallery-info">
+                <span class="gallery-date">
+                    ${imgData.date}
+                </span>
+            </div>
+        `;
+
+        grid.appendChild(item);
+    });
+
+    updateMaxScroll();
+}
+
+        function toggleGalleryOrder(e) {
+            e.stopPropagation();
+            isChronological = !isChronological;
+            updateSortButtonUI();
+            renderGallery();
+        }
+
+        function updateSortButtonUI() {
+            const txt = document.getElementById('lbl-sort-text');
+            const icon = document.getElementById('sort-icon');
+            if(isChronological) {
+                icon.innerText = "▼";
+                txt.innerText = translations[currentLang].sortOldest;
+            } else {
+                icon.innerText = "▲";
+                txt.innerText = translations[currentLang].sortNewest;
+            }
+        }
+
+        function openLightbox(index, event) {
+            if(event) event.stopPropagation();
+            const lightbox = document.getElementById('gallery-lightbox');
+            const card = document.getElementById('lightbox-card');
+            const img = document.getElementById('lightbox-img');
+            const dateDisp = document.getElementById('lightbox-date-display');
+            const storyDisp = document.getElementById('lightbox-story-display');
+            
+            const data = galleryImages[index];
+            
+            img.src = data.url;
+            dateDisp.innerText = data.date;
+            storyDisp.innerText = data.story[currentLang] || data.story['ro'];
+            
+            card.classList.remove('flipped'); 
+            lightbox.classList.add('active');
+        }
+
+        function closeLightbox() {
+            document.getElementById('gallery-lightbox').classList.remove('active');
+        }
+
+        function flipLightboxCard(event) {
+            event.stopPropagation();
+            document.getElementById('lightbox-card').classList.toggle('flipped');
         }
 
         function spawnConfettiParticle() {
@@ -586,9 +1017,7 @@
         function stopConfetti() { if (confettiInterval) { clearInterval(confettiInterval); confettiInterval = null; } const c = document.getElementById('story-confetti-carrier'); if (c) c.innerHTML = ''; }
 
         function spawnTrail(e) {
-            // E FOARTE IMPORTANT: Dezactivam urma pe mobil complet, blocheaza scroll-ul procesand DOM-ul continuu pe "touchmove"!
             if (!trailActive || window.innerWidth <= 768) return; 
-            
             trailThrottle++; if (trailThrottle % 3 !== 0) return;
             const x = e.touches ? e.touches[0].clientX : e.clientX, y = e.touches ? e.touches[0].clientY : e.clientY;
             const el = document.createElement('div'); el.classList.add('mouse-trail-particle');
@@ -701,10 +1130,9 @@
 
         function smoothScrollLoop() {
             if (window.innerWidth <= 768) {
-                // Pe mobil luam exact cat a scrollat utilizatorul nativ pe display!
                 currentY = window.scrollY || document.documentElement.scrollTop;
                 targetY = currentY;
-                scrollContainer.style.transform = 'none'; // Impiedicam JS-ul sa blocheze vizualizarea 
+                scrollContainer.style.transform = 'none'; 
             } else {
                 targetY = Math.min(Math.max(targetY, 0), maxScroll);
                 currentY += (targetY - currentY) * ease; 
@@ -742,7 +1170,7 @@
         requestAnimationFrame(smoothScrollLoop);
 
         function spawnParticle(e) {
-            if (e.target.closest('#global-topbar, #glitch-text, #side-panel, .love-counter-box, #intro-font-toggle, #intro-lang-toggle, #scratch-canvas, .capsule-card, .emergency-box-trigger')) return;
+            if (e.target.closest('#global-topbar, #glitch-text, #side-panel, .love-counter-box, #intro-font-toggle, #intro-lang-toggle, #scratch-canvas, .capsule-card, .emergency-box-trigger, #dynamic-gallery-grid, #gallery-lightbox, .gallery-sort-btn')) return;
             const el = document.createElement('div'); el.classList.add('click-particle');
             el.innerText = activeEffect === 'hearts' ? ['❤️', '💖', '💝', '💕'][Math.floor(Math.random()*4)] : '💋';
             el.style.left = e.clientX + 'px'; el.style.top = e.clientY + 'px';
